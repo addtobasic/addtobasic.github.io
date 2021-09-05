@@ -14,7 +14,7 @@ const Home: FC = () => {
         <title>genshi@genshi0916: ~</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <div className='container mx-auto text-shellGreen text-xl tracking-widest' >
+      <div className='container mx-auto sm:w-5/6 md:w-4/6 :w-2/4 xl:w-5/12 text-shellGreen text-xl' >
         <Terminal >
         </Terminal>
       </div>
