@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 const TERMINAL_MENU_INDEX = [
   'File',
@@ -10,6 +10,19 @@ const TERMINAL_MENU_INDEX = [
 ];
 
 const Terminal: FC = () => {
+  const [command, setCommnand] = useState('');
+
+  const handleChange = (e) => {
+    setCommnand(e.target.value);
+  };
+
+  const handleOnEnter = (e) => {
+    if (e.key === 'Enter') {
+      console.log(command);
+      setCommnand('');
+    }
+  };
+
   return (
     <div className='h-screen pt-20'>
       <div className='flex justify-end bg-title-bar h-10 rounded-t-xl  border-gray-600'>
@@ -47,6 +60,8 @@ const Terminal: FC = () => {
           id='command-area'
           type='text'
           autoComplete='off'
+          onChange={handleChange}
+          onKeyPress={handleOnEnter}
         />
       </div>
     </div>
