@@ -1,5 +1,14 @@
 import React, { FC } from 'react';
 
+const TERMINAL_MENU_INDEX = [
+  'File',
+  'Edit',
+  'View',
+  'Search',
+  'Terminal',
+  'Help',
+];
+
 const Terminal: FC = () => {
   return (
     <div className='h-screen pt-20'>
@@ -15,17 +24,26 @@ const Terminal: FC = () => {
         </span>
       </div>
       <div className='flex bg-menu-bar h-6 border-gray-700 font-ubuntu_menu'>
-        <span className='text-base tracking-tight text-gray-200	ml-2.5'>File</span>
-        <span className='text-base tracking-tight text-gray-200 ml-2.5'>Edit</span>
-        <span className='text-base tracking-tight text-gray-200 ml-2.5'>View</span>
-        <span className='text-base tracking-tight text-gray-200 ml-2.5'>Search</span>
-        <span className='text-base tracking-tight text-gray-200 ml-2.5'>Terminal</span>
-        <span className='text-base tracking-tight text-gray-200 ml-2.5'>Help</span>
+        {TERMINAL_MENU_INDEX.map((index) => {
+          return (
+            <span
+              className='text-base tracking-tight text-gray-200	ml-2.5'
+              key={index}
+            >
+              {index}
+            </span>
+          );
+        })}
       </div>
-      <div className='block bg-ubuntu-terminal opacity-90 h-3/6 shadow-2xl rounded-b-xl pt-2 pl-3 overflow-auto'>
-        <p className='tracking-tight text-ubuntu-terminal-text font-ubuntu_terminal'>genshi@genshi0916:~$</p>
+      <div className='bg-ubuntu-terminal opacity-90 h-3/6 shadow-2xl rounded-b-xl pt-2 pl-3 overflow-auto text-xl'>
+        <span className='tracking-tight font-ubuntu_terminal'>
+          <span className='text-ubuntu-terminal-text'>genshi@genshi0916</span>
+          <span className='text-white'>:</span>
+          <span className='text-blue-300'>~</span>
+          <span className='text-white'> $ </span>
+        </span>
         <input
-          className='bg-transparent focus-within:outline-none'
+          className='bg-transparent focus-within:outline-none w-1/2 font-ubuntu_terminal text-white'
           id='command-area'
           type='text'
           autoComplete='off'
