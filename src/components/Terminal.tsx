@@ -14,6 +14,7 @@ const Terminal: FC = () => {
   const [command, setCommand] = useState('');
   const [replies, setReplies] = useState([]);
   const [logs, setLogs] = useState([]);
+  const [currentDir, setCurrentDir] = useState('/home/genshi');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCommand(e.target.value);
@@ -21,7 +22,7 @@ const Terminal: FC = () => {
 
   const handleOnEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      const res = handler(command);
+      const res = handler(command, currentDir);
       setReplies([...replies, res]);
       setLogs([...logs, { command: command }]);
       setCommand('');
@@ -30,7 +31,7 @@ const Terminal: FC = () => {
 
   return (
     <div className='h-screen pt-20'>
-      <div className='flex justify-end bg-title-bar h-10 rounded-t-xl  border-gray-600'>
+      <div className='flex justify-end bg-title-bar h-10 rounded-t-xl border-gray-600'>
         <span className='inline-block h-5 w-5 bg-title-bar-button rounded-full  mt-2 text-sm'>
           {/* <span className=' text-grey-500 ml-0.5 mt-1'>ー</span> */}
         </span>
