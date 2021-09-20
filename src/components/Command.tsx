@@ -24,6 +24,26 @@ const handler = (inputCommand: string, currentDir: string) => {
       ];
     }
 
+    else if(currentDir === '/home/genshi/products'){
+      dirItem = [
+        'portfolio.txt',
+        'cui-portfolio.txt',
+        'deadline-timer.txt',
+        'download-pixiv-images.txt'
+      ];
+    }
+
+    else if(currentDir === '/home/genshi/contacts'){
+      dirItem = [
+        'twitter.txt',
+        'github.txt',
+        'facebook.txt',
+        'instagram.txt',
+        'qiita.txt',
+        'gmail.txt'
+      ];
+    }
+
     return <Ls dirItem={dirItem} />;
   }
 
