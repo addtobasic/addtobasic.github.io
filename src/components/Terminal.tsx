@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import Command from './Command';
+import handler from './Command';
 
 const TERMINAL_MENU_INDEX = [
   'File',
@@ -21,8 +21,8 @@ const Terminal: FC = () => {
 
   const handleOnEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      // const res = Command(command);
-      // setReplies([...replies, res]);
+      const res = handler(command);
+      setReplies([...replies, res]);
       setLogs([...logs, { command: command }]);
       setCommand('');
     }
@@ -69,6 +69,7 @@ const Terminal: FC = () => {
             <span className='font-ubuntu_terminal text-white'>
               {log.command}
             </span>
+            {replies[idx]}
           </div>
         ))}
         <span className='tracking-tight font-ubuntu_terminal'>
