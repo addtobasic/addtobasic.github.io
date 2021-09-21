@@ -2,6 +2,7 @@ import React from 'react';
 import Whoami from './command/Whoami';
 import NotFound from './command/NotFound';
 import Ls from './command/Ls';
+import Pwd from './command/Pwd';
 
 const handler = (inputCommand: string, currentDir: string, setCurrentDir: (currentDir: string) => void) => {
   const command = inputCommand.trim();
@@ -59,6 +60,10 @@ const handler = (inputCommand: string, currentDir: string, setCurrentDir: (curre
     else {
       return <NotFound command={"hogeddd"} />;
     }
+  }
+
+  else if(command === 'pwd'){
+    return <Pwd currentDir={currentDir} />;
   }
 
   else {
