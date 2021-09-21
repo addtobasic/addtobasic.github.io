@@ -22,7 +22,7 @@ const Terminal: FC = () => {
 
   const handleOnEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      const res = handler(command, currentDir);
+      const res = handler(command, currentDir, setCurrentDir);
       setReplies([...replies, res]);
       setLogs([...logs, { command: command }]);
       setCommand('');

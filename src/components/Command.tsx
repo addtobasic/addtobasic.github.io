@@ -3,7 +3,7 @@ import Whoami from './command/Whoami';
 import NotFound from './command/NotFound';
 import Ls from './command/Ls';
 
-const handler = (inputCommand: string, currentDir: string) => {
+const handler = (inputCommand: string, currentDir: string, setCurrentDir: (currentDir: string) => void) => {
   const command = inputCommand.trim();
 
   if (command === '') {
@@ -14,7 +14,7 @@ const handler = (inputCommand: string, currentDir: string) => {
     return <Whoami />;
   }
 
-  else if (command === 'ls') {
+  else if (command === 'ls' || command.startsWith('ls ')) {
     let dirItem: string[] = [];
     if(currentDir === '/home/genshi'){
       dirItem = [
@@ -45,6 +45,20 @@ const handler = (inputCommand: string, currentDir: string) => {
     }
 
     return <Ls dirItem={dirItem} />;
+  }
+
+  else if(command === 'cd'){
+    setCurrentDir('/home/genshi');
+  }
+
+  else if(command.startsWith('cd ')){
+    let path = command.replace('cd ', '');
+    if(currentDir === '/home/genshi' && (path === 'products' || path === 'contacts')){
+      setCurrentDir('/home/genshi/'+ path);
+    }
+    else {
+      return <NotFound command={"hogeddd"} />;
+    }
   }
 
   else {
