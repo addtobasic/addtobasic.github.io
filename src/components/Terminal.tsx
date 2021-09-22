@@ -27,7 +27,12 @@ const Terminal: FC = () => {
       setReplies([...replies, res]);
       setLogs([...logs, { command: command, dir: currentDir }]);
       setCommand('');
+      window.setTimeout(scrollBottom, 100);
     }
+  };
+
+  const scrollBottom = () => {
+    document.getElementById('bottom').scrollIntoView({ behavior: 'auto' });
   };
 
   return (
@@ -58,7 +63,7 @@ const Terminal: FC = () => {
         </div>
       </div>
       <div className='bg-ubuntu-terminal opacity-90 h-3/6 shadow-2xl rounded-b-xl pl-3 overflow-auto text-xl'>
-        {logs.map((log: { command: string, dir: string }, idx: number) => (
+        {logs.map((log: { command: string; dir: string }, idx: number) => (
           <div key={idx}>
             <span className='tracking-tight font-ubuntu_terminal'>
               <span className='text-ubuntu-terminal-text'>
@@ -66,7 +71,7 @@ const Terminal: FC = () => {
               </span>
               <span className='text-white'>:</span>
               <span className='text-blue-500'>~</span>
-              <Directory dir={log.dir}/>
+              <Directory dir={log.dir} />
               <span className='text-white'> $ </span>
             </span>
             <span className='font-ubuntu_terminal text-white'>
@@ -79,10 +84,9 @@ const Terminal: FC = () => {
           <span className='text-ubuntu-terminal-text'>genshi@genshi0916</span>
           <span className='text-white'>:</span>
           <span className='text-blue-500'>~</span>
-          <Directory dir={currentDir}/>
+          <Directory dir={currentDir} />
           <span className='text-white'> $ </span>
         </span>
-
         <input
           className='bg-transparent focus-within:outline-none w-1/2 font-ubuntu_terminal text-white'
           id='command-area'
@@ -92,6 +96,7 @@ const Terminal: FC = () => {
           onChange={handleChange}
           onKeyPress={handleOnEnter}
         />
+        <div id='bottom' style={{ float: 'left' }} />
       </div>
     </div>
   );
