@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 import handler from './Command';
+import Directory from './Directory';
 
 const TERMINAL_MENU_INDEX = [
   'File',
@@ -24,7 +25,7 @@ const Terminal: FC = () => {
     if (e.key === 'Enter') {
       const res = handler(command, currentDir, setCurrentDir);
       setReplies([...replies, res]);
-      setLogs([...logs, { command: command }]);
+      setLogs([...logs, { command: command, dir: currentDir }]);
       setCommand('');
     }
   };
@@ -57,14 +58,15 @@ const Terminal: FC = () => {
         </div>
       </div>
       <div className='bg-ubuntu-terminal opacity-90 h-3/6 shadow-2xl rounded-b-xl pl-3 overflow-auto text-xl'>
-        {logs.map((log: { command: string }, idx: number) => (
+        {logs.map((log: { command: string, dir: string }, idx: number) => (
           <div key={idx}>
             <span className='tracking-tight font-ubuntu_terminal'>
               <span className='text-ubuntu-terminal-text'>
                 genshi@genshi0916
               </span>
               <span className='text-white'>:</span>
-              <span className='text-blue-300'>~</span>
+              <span className='text-blue-500'>~</span>
+              <Directory dir={log.dir}/>
               <span className='text-white'> $ </span>
             </span>
             <span className='font-ubuntu_terminal text-white'>
@@ -76,7 +78,8 @@ const Terminal: FC = () => {
         <span className='tracking-tight font-ubuntu_terminal'>
           <span className='text-ubuntu-terminal-text'>genshi@genshi0916</span>
           <span className='text-white'>:</span>
-          <span className='text-blue-300'>~</span>
+          <span className='text-blue-500'>~</span>
+          <Directory dir={currentDir}/>
           <span className='text-white'> $ </span>
         </span>
 
