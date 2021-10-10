@@ -10,7 +10,7 @@ const Home: FC = () => {
   return (
     <div onClick={anyWhereClick}>
       <Head>
-        <title>genshi@genshi0916: ~</title>
+        <title>genshi@addtobasic: ~</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <div className='container mx-auto sm:w-5/6 md:w-4/6 :w-2/4 xl:w-5/12 text-shellGreen text-xl'>

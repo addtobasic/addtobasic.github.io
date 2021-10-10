@@ -67,7 +67,7 @@ const Terminal: FC = () => {
           <div key={idx}>
             <span className='tracking-tight font-ubuntu_terminal'>
               <span className='text-ubuntu-terminal-text'>
-                genshi@genshi0916
+                genshi@addtobasic
               </span>
               <span className='text-white'>:</span>
               <span className='text-blue-500'>~</span>
@@ -81,7 +81,7 @@ const Terminal: FC = () => {
           </div>
         ))}
         <span className='tracking-tight font-ubuntu_terminal'>
-          <span className='text-ubuntu-terminal-text'>genshi@genshi0916</span>
+          <span className='text-ubuntu-terminal-text'>genshi@addtobasic</span>
           <span className='text-white'>:</span>
           <span className='text-blue-500'>~</span>
           <Directory dir={currentDir} />
