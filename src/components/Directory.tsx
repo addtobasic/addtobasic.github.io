@@ -7,7 +7,9 @@ type Props = {
 const Directory: FC<Props> = ({ dir }) => {
   const displayDir = dir.replace('/home/genshi', '');
 
-  return <span className='font-ubuntu_terminal text-blue-500'>{displayDir}</span>;
+  return (
+    <span className='font-ubuntu_terminal text-blue-500'>{displayDir}</span>
+  );
 };
 
 export default Directory;

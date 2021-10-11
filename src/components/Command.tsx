@@ -4,6 +4,7 @@ import NotFound from './command/NotFound';
 import NoFileOrDir from './command/NoFileOrDir';
 import NotDir from './command/NotDir';
 import Ls from './command/Ls';
+import Cat from './command/Cat';
 import Pwd from './command/Pwd';
 
 let dirItem: string[] = [];
@@ -94,6 +95,16 @@ const handler = (
         <NoFileOrDir fileOrDir={path} />
       );
     }
+  }
+
+  // cat
+  else if (command === 'cat'){
+    // なにも実行しない
+  }
+  else if (command.startsWith('cat ')) {
+    let catFile = command.replace('cat ', '').replace(/\/$/, '');
+
+    return <Cat dirItem={dirItem} catFile={catFile} />;
   }
 
   else if (command === 'whoami') {
