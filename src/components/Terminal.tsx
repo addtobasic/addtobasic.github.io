@@ -31,6 +31,78 @@ const Terminal: FC = () => {
     }
   };
 
+  const handleOnTab= (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if(e.key == 'Tab'){
+      // 次の対象のオブジェクトに移動しない
+      e.preventDefault();
+
+      // cd補完
+      if (command.startsWith('cd')) {
+        let path = command.replace('cd', '').replace(/\/$/, '');
+        if (currentDir === '/home/genshi') {
+          if(path[1] === 'p'){
+            setCommand('cd products/');
+          }
+          else if(path[1] === 'c'){
+            setCommand('cd contacts/');
+          }
+        }
+
+        else if(currentDir === '/home'){
+          if(path[1] === 'g'){
+            setCommand('cd genshi/');
+          }
+        }
+      }
+
+      // cat補完
+      else if (command.startsWith('cat')) {
+        let catFile = command.replace('cat', '').replace(/\/$/, '');
+        if (currentDir === '/home/genshi') {
+          if(catFile[1] === 'p'){
+            setCommand('cat profile.txt');
+          }
+        }
+
+        else if(currentDir === '/home/genshi/products'){
+          if(catFile[1] === 'p'){
+            setCommand('cat portfolio.txt');
+          }
+          else if(catFile[1] === 'c'){
+            setCommand('cat cui-portfolio.txt');
+          }
+          else if(catFile[1] === 'd' && catFile[2] === 'e'){
+            setCommand('cat deadline-timer.txt');
+          }
+          else if(catFile[1] === 'd' && catFile[2] === 'o'){
+            setCommand('cat download-pixiv-images.txt');
+          }
+        }
+
+        else if(currentDir === '/home/genshi/contacts'){
+          if(catFile[1] === 't'){
+            setCommand('cat twitter.txt');
+          }
+          else if(catFile[1] === 'g' && catFile[2] === 'i'){
+            setCommand('cat github.txt');
+          }
+          else if(catFile[1] === 'g' && catFile[2] === 'm'){
+            setCommand('cat gmail.txt');
+          }
+          else if(catFile[1] === 'f'){
+            setCommand('cat facebook.txt');
+          }
+          else if(catFile[1] === 'i'){
+            setCommand('cat instagram.txt');
+          }
+          else if(catFile[1] === 'q'){
+            setCommand('cat qiita.txt');
+          }
+        }
+      }
+    }
+  };
+
   const scrollBottom = () => {
     document.getElementById('bottom').scrollIntoView({ behavior: 'auto' });
   };
@@ -95,6 +167,7 @@ const Terminal: FC = () => {
           value={command}
           onChange={handleChange}
           onKeyPress={handleOnEnter}
+          onKeyDown={handleOnTab}
         />
         <div id='bottom' style={{ float: 'left' }} />
       </div>
