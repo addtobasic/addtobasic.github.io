@@ -14,35 +14,35 @@ const CAT_FILE_CONTENTS = {
     'url': 'https://github.com/addtobasic/addtobasic.github.io'
   },
   'deadline-timer.txt':{
-    'content': 'addtobasic.dev',
-    'url': 'https://addtobasic.dev/'
+    'content': '名言が表示される邪悪なタイマー',
+    'url': 'https://addtobasic.github.io/deadline-timer/'
   },
   'download-pixiv-images.txt':{
-    'content': 'addtobasic.dev',
-    'url': 'https://addtobasic.dev/'
+    'content': 'pixivのブックマークをすべてダウンロードしてくるアプリ',
+    'url': 'https://github.com/addtobasic/auto-download-pixiv-bookmark-images'
   },
   'twitter.txt':{
-    'content': 'addtobasic',
+    'content': 'Twitter: addtobasic',
     'url': 'https://twitter.com/addtobasic'
   },
   'github.txt':{
-    'content': 'addtobasic',
+    'content': 'GitHub: addtobasic',
     'url': 'https://github.com/addtobasic'
   },
   'facebook.txt':{
-    'content': 'Genki Kano',
+    'content': 'facebook: Genki Kano',
     'url': 'https://www.facebook.com/genki.kano.794'
   },
   'instagram.txt':{
-    'content': 'addtobasic',
+    'content': 'instagram: addtobasic',
     'url': 'https://www.instagram.com/addtobasic/'
   },
   'qiita.txt': {
-    'content': 'addtobasic',
+    'content': 'Qiita: addtobasic',
     'url': 'https://qiita.com/addtobasic'
   },
   'gmail.txt': {
-    'content': 'addtobasic@gmail.com',
+    'content': 'Gmail: addtobasic@gmail.com',
     'url': 'mailto:addtobasic@gmail.com'
   },
 };
