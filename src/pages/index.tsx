@@ -12,7 +12,7 @@ const Home: FC = () => {
       <Head>
         <title>genshi@addtobasic: ~</title>
         <link rel='icon' href='/favicon.ico' />
-        <meta property="og:title" content="CUI Portfolio" />
+        <meta property="og:title" content="Genshi's CUI Portfolio" />
         <meta property="og:description" content="CUI Portfolio like ubuntu terminal." />
         <meta property="og:url" content="https://addtobasic.github.io/" />
         <meta property="og:type" content="website" />
