@@ -31,8 +31,9 @@ const Terminal: FC = () => {
     }
   };
 
-  const handleOnTab= (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if(e.key == 'Tab'){
+  const handleOnTab = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    let backNum = 0;
+    if (e.key === 'Tab') {
       // 次の対象のオブジェクトに移動しない
       e.preventDefault();
 
@@ -40,16 +41,13 @@ const Terminal: FC = () => {
       if (command.startsWith('cd')) {
         let path = command.replace('cd', '').replace(/\/$/, '');
         if (currentDir === '/home/genshi') {
-          if(path[1] === 'p'){
+          if (path[1] === 'p') {
             setCommand('cd products/');
-          }
-          else if(path[1] === 'c'){
+          } else if (path[1] === 'c') {
             setCommand('cd contacts/');
           }
-        }
-
-        else if(currentDir === '/home'){
-          if(path[1] === 'g'){
+        } else if (currentDir === '/home') {
+          if (path[1] === 'g') {
             setCommand('cd genshi/');
           }
         }
@@ -59,47 +57,45 @@ const Terminal: FC = () => {
       else if (command.startsWith('cat')) {
         let catFile = command.replace('cat', '').replace(/\/$/, '');
         if (currentDir === '/home/genshi') {
-          if(catFile[1] === 'p'){
+          if (catFile[1] === 'p') {
             setCommand('cat profile.txt');
           }
-        }
-
-        else if(currentDir === '/home/genshi/products'){
-          if(catFile[1] === 'p'){
+        } else if (currentDir === '/home/genshi/products') {
+          if (catFile[1] === 'p') {
             setCommand('cat portfolio.txt');
-          }
-          else if(catFile[1] === 'c'){
+          } else if (catFile[1] === 'c') {
             setCommand('cat cui-portfolio.txt');
-          }
-          else if(catFile[1] === 'd' && catFile[2] === 'e'){
+          } else if (catFile[1] === 'd' && catFile[2] === 'e') {
             setCommand('cat deadline-timer.txt');
-          }
-          else if(catFile[1] === 'd' && catFile[2] === 'o'){
+          } else if (catFile[1] === 'd' && catFile[2] === 'o') {
             setCommand('cat download-pixiv-images.txt');
           }
-        }
-
-        else if(currentDir === '/home/genshi/contacts'){
-          if(catFile[1] === 't'){
+        } else if (currentDir === '/home/genshi/contacts') {
+          if (catFile[1] === 't') {
             setCommand('cat twitter.txt');
-          }
-          else if(catFile[1] === 'g' && catFile[2] === 'i'){
+          } else if (catFile[1] === 'g' && catFile[2] === 'i') {
             setCommand('cat github.txt');
-          }
-          else if(catFile[1] === 'g' && catFile[2] === 'm'){
+          } else if (catFile[1] === 'g' && catFile[2] === 'm') {
             setCommand('cat gmail.txt');
-          }
-          else if(catFile[1] === 'f'){
+          } else if (catFile[1] === 'f') {
             setCommand('cat facebook.txt');
-          }
-          else if(catFile[1] === 'i'){
+          } else if (catFile[1] === 'i') {
             setCommand('cat instagram.txt');
-          }
-          else if(catFile[1] === 'q'){
+          } else if (catFile[1] === 'q') {
             setCommand('cat qiita.txt');
           }
         }
       }
+    }
+
+    // コマンド履歴の実装
+    else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (logs[0] !== undefined) {
+        setCommand(String(logs[logs.length - 1].command));
+      }
+    } else if (e.key === 'ArrowDown') {
+      setCommand('');
     }
   };
 
