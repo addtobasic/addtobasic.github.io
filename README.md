@@ -20,3 +20,11 @@ $ npm run dev
 # Hosting
 
 This page is hosted by GitHub Pages.
+
+# Reference
+このポートフォリオ作るにあたって [kazuki-komori](https://github.com/kazuki-komori/) さんのポートフォリオを参考にさせていただきました.
+
+[https://kazuyan-cui-git-main-kazuki-komori.vercel.app/](https://kazuyan-cui-git-main-kazuki-komori.vercel.app/)
+
+# License
+The source code is licensed MIT.
