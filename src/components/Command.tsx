@@ -6,6 +6,8 @@ import NotDir from './command/NotDir';
 import Ls from './command/Ls';
 import Cat from './command/Cat';
 import Pwd from './command/Pwd';
+import {GENSHI_PATH, PRODUCTS_PATH, CONTACTS_PATH} from '../util';
+
 
 let dirItem: string[] = [];
 
@@ -23,18 +25,18 @@ const handler = (
 
   // ls
   else if (command === 'ls' || command.startsWith('ls ')) {
-    if (currentDir === '/home/genshi') {
+    if (currentDir === GENSHI_PATH) {
       dirItem = ['profile.txt', 'products', 'contacts'];
     } else if (currentDir === '/home') {
       dirItem = ['genshi'];
-    } else if (currentDir === '/home/genshi/products') {
+    } else if (currentDir === PRODUCTS_PATH) {
       dirItem = [
         'portfolio.txt',
         'cui-portfolio.txt',
         'deadline-timer.txt',
         'download-pixiv-images.txt',
       ];
-    } else if (currentDir === '/home/genshi/contacts') {
+    } else if (currentDir === CONTACTS_PATH) {
       dirItem = [
         'twitter.txt',
         'github.txt',
@@ -50,25 +52,25 @@ const handler = (
 
   // cd
   else if (command === 'cd') {
-    setCurrentDir('/home/genshi');
+    setCurrentDir(GENSHI_PATH);
   } else if (command.startsWith('cd ')) {
     // pathの抽出と/の削除
     let path = command.replace('cd ', '').replace(/\/$/, '');
 
     if (
-      currentDir === '/home/genshi' &&
+      currentDir === GENSHI_PATH &&
       (path === 'products' || path === 'contacts')
     ) {
-      setCurrentDir('/home/genshi/' + path);
+      setCurrentDir(GENSHI_PATH + '/' + path);
     } else if (currentDir === '/home' && path === 'genshi') {
-      setCurrentDir('/home/genshi');
+      setCurrentDir(GENSHI_PATH);
     } else if (path === '..' || path === '../') {
-      if (currentDir === '/home/genshi') {
+      if (currentDir === GENSHI_PATH) {
         setCurrentDir('/home');
-      } else if (currentDir === '/home/genshi/products') {
-        setCurrentDir('/home/genshi');
-      } else if (currentDir === '/home/genshi/contacts') {
-        setCurrentDir('/home/genshi');
+      } else if (currentDir === PRODUCTS_PATH) {
+        setCurrentDir(GENSHI_PATH);
+      } else if (currentDir === CONTACTS_PATH) {
+        setCurrentDir(GENSHI_PATH);
       }
     } else {
       return dirItem.includes(path) ? (
