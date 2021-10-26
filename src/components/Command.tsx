@@ -6,8 +6,16 @@ import NotDir from './command/NotDir';
 import Ls from './command/Ls';
 import Cat from './command/Cat';
 import Pwd from './command/Pwd';
-import {GENSHI_PATH, PRODUCTS_PATH, CONTACTS_PATH} from '../util';
-
+import {
+  HOME_PATH,
+  GENSHI_PATH,
+  PRODUCTS_PATH,
+  CONTACTS_PATH,
+  LS_HOME_ITEM,
+  LS_GENSHI_ITEM,
+  LS_PRODUCTS_ITEM,
+  LS_CONTACTS_ITEM,
+} from '../util';
 
 let dirItem: string[] = [];
 
@@ -26,25 +34,13 @@ const handler = (
   // ls
   else if (command === 'ls' || command.startsWith('ls ')) {
     if (currentDir === GENSHI_PATH) {
-      dirItem = ['profile.txt', 'products', 'contacts'];
-    } else if (currentDir === '/home') {
-      dirItem = ['genshi'];
+      dirItem = LS_GENSHI_ITEM;
+    } else if (currentDir === HOME_PATH) {
+      dirItem = LS_HOME_ITEM;
     } else if (currentDir === PRODUCTS_PATH) {
-      dirItem = [
-        'portfolio.txt',
-        'cui-portfolio.txt',
-        'deadline-timer.txt',
-        'download-pixiv-images.txt',
-      ];
+      dirItem = LS_PRODUCTS_ITEM;
     } else if (currentDir === CONTACTS_PATH) {
-      dirItem = [
-        'twitter.txt',
-        'github.txt',
-        'facebook.txt',
-        'instagram.txt',
-        'qiita.txt',
-        'gmail.txt',
-      ];
+      dirItem = LS_CONTACTS_ITEM;
     }
 
     return <Ls dirItem={dirItem} />;
@@ -62,11 +58,11 @@ const handler = (
       (path === 'products' || path === 'contacts')
     ) {
       setCurrentDir(GENSHI_PATH + '/' + path);
-    } else if (currentDir === '/home' && path === 'genshi') {
+    } else if (currentDir === HOME_PATH && path === 'genshi') {
       setCurrentDir(GENSHI_PATH);
     } else if (path === '..' || path === '../') {
       if (currentDir === GENSHI_PATH) {
-        setCurrentDir('/home');
+        setCurrentDir(HOME_PATH);
       } else if (currentDir === PRODUCTS_PATH) {
         setCurrentDir(GENSHI_PATH);
       } else if (currentDir === CONTACTS_PATH) {
