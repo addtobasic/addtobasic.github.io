@@ -11,6 +11,9 @@ const TERMINAL_MENU_INDEX = [
   'Help',
 ];
 
+let logsNum = 0;
+let logsStateNum = 0;
+
 const Terminal: FC = () => {
   const [command, setCommand] = useState('');
   const [replies, setReplies] = useState([]);
@@ -28,11 +31,13 @@ const Terminal: FC = () => {
       setLogs([...logs, { command: command, dir: currentDir }]);
       setCommand('');
       window.setTimeout(scrollBottom, 100);
+
+      logsNum += 1;
+      logsStateNum += 1;
     }
   };
 
   const handleOnTab = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    let backNum = 0;
     if (e.key === 'Tab') {
       // 次の対象のオブジェクトに移動しない
       e.preventDefault();
@@ -92,10 +97,22 @@ const Terminal: FC = () => {
     else if (e.key === 'ArrowUp') {
       e.preventDefault();
       if (logs[0] !== undefined) {
-        setCommand(String(logs[logs.length - 1].command));
+        if (logsStateNum > 0) {
+          logsStateNum -= 1;
+
+          setCommand(String(logs[logsStateNum].command));
+        }
       }
     } else if (e.key === 'ArrowDown') {
-      setCommand('');
+      e.preventDefault();
+      if (logs[0] !== undefined) {
+        if (logsNum - logsStateNum - 1 > 0) {
+          logsStateNum += 1;
+          setCommand(String(logs[logsStateNum].command));
+        } else {
+          setCommand('');
+        }
+      }
     }
   };
 
