@@ -145,6 +145,8 @@ const handler = (
     return <Whoami />;
   } else if (command === 'pwd') {
     return <Pwd currentDir={currentDir} />;
+  } else if (command === 'clear') {
+    return 'clear';
   } else if (command === 'date') {
     const dateStr = getDateStr();
 

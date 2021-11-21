@@ -30,6 +30,12 @@ const Terminal: FC = () => {
       setReplies([...replies, res]);
       setLogs([...logs, { command: command, dir: currentDir }]);
       setCommand('');
+      if (res === 'clear') {
+        setReplies([]);
+        setLogs([]);
+        logsNum = 0;
+        logsStateNum = 0;
+      }
       window.setTimeout(scrollBottom, 100);
 
       logsNum += 1;
@@ -100,7 +106,9 @@ const Terminal: FC = () => {
         if (logsStateNum > 0) {
           logsStateNum -= 1;
 
-          setCommand(String(logs[logsStateNum].command));
+          if (logs[logsStateNum] !== undefined) {
+            setCommand(String(logs[logsStateNum].command));
+          }
         }
       }
     } else if (e.key === 'ArrowDown') {
@@ -108,7 +116,9 @@ const Terminal: FC = () => {
       if (logs[0] !== undefined) {
         if (logsNum - logsStateNum - 1 > 0) {
           logsStateNum += 1;
-          setCommand(String(logs[logsStateNum].command));
+          if (logs[logsStateNum] !== undefined) {
+            setCommand(String(logs[logsStateNum].command));
+          }
         } else {
           setCommand('');
         }
