@@ -13,13 +13,15 @@ import {
   GENSHI_PATH,
   PRODUCTS_PATH,
   CONTACTS_PATH,
+  WHITE_PATH,
   LS_HOME_ITEM,
   LS_GENSHI_ITEM,
   LS_PRODUCTS_ITEM,
   LS_CONTACTS_ITEM,
+  LS_WHITE_ITEM,
 } from '../util';
 
-let dirItem: string[] = [];
+let dirItem: string[] = LS_GENSHI_ITEM;
 
 const getDateStr = () => {
   const now = new Date();
@@ -98,6 +100,8 @@ const handler = (
       dirItem = LS_PRODUCTS_ITEM;
     } else if (currentDir === CONTACTS_PATH) {
       dirItem = LS_CONTACTS_ITEM;
+    } else if (currentDir === WHITE_PATH) {
+      dirItem = LS_WHITE_ITEM;
     }
 
     return <Ls dirItem={dirItem} />;
@@ -110,10 +114,11 @@ const handler = (
     // pathの抽出と/の削除
     let path = command.replace('cd ', '').replace(/\/$/, '');
 
-    if (
-      currentDir === GENSHI_PATH &&
-      (path === 'products' || path === 'contacts')
-    ) {
+    if (currentDir === GENSHI_PATH && path === 'products') {
+      setCurrentDir(GENSHI_PATH + '/' + path);
+    } else if (currentDir === GENSHI_PATH && path === 'contacts') {
+      setCurrentDir(GENSHI_PATH + '/' + path);
+    } else if (currentDir === GENSHI_PATH && path === 'white') {
       setCurrentDir(GENSHI_PATH + '/' + path);
     } else if (currentDir === HOME_PATH && path === 'genshi') {
       setCurrentDir(GENSHI_PATH);
@@ -123,6 +128,8 @@ const handler = (
       } else if (currentDir === PRODUCTS_PATH) {
         setCurrentDir(GENSHI_PATH);
       } else if (currentDir === CONTACTS_PATH) {
+        setCurrentDir(GENSHI_PATH);
+      } else if (currentDir === WHITE_PATH) {
         setCurrentDir(GENSHI_PATH);
       }
     } else {
@@ -140,7 +147,7 @@ const handler = (
   } else if (command.startsWith('cat ')) {
     let catFile = command.replace('cat ', '').replace(/\/$/, '');
 
-    return <Cat dirItem={dirItem} catFile={catFile} />;
+    return <Cat dirItem={dirItem} catFile={catFile} currentDir={currentDir} />;
   } else if (command === 'whoami') {
     return <Whoami />;
   } else if (command === 'pwd') {

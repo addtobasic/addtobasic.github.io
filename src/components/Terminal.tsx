@@ -1,6 +1,13 @@
 import React, { FC, useState } from 'react';
 import handler from './Command';
 import Directory from './Directory';
+import {
+  HOME_PATH,
+  GENSHI_PATH,
+  PRODUCTS_PATH,
+  CONTACTS_PATH,
+  WHITE_PATH,
+} from '../util';
 
 const TERMINAL_MENU_INDEX = [
   'File',
@@ -18,7 +25,7 @@ const Terminal: FC = () => {
   const [command, setCommand] = useState('');
   const [replies, setReplies] = useState([]);
   const [logs, setLogs] = useState([]);
-  const [currentDir, setCurrentDir] = useState('/home/genshi');
+  const [currentDir, setCurrentDir] = useState(GENSHI_PATH);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCommand(e.target.value);
@@ -51,13 +58,15 @@ const Terminal: FC = () => {
       // cd補完
       if (command.startsWith('cd')) {
         let path = command.replace('cd', '').replace(/\/$/, '');
-        if (currentDir === '/home/genshi') {
+        if (currentDir === GENSHI_PATH) {
           if (path[1] === 'p') {
             setCommand('cd products/');
           } else if (path[1] === 'c') {
             setCommand('cd contacts/');
+          } else if (path[1] === 'w') {
+            setCommand('cd white/');
           }
-        } else if (currentDir === '/home') {
+        } else if (currentDir === HOME_PATH) {
           if (path[1] === 'g') {
             setCommand('cd genshi/');
           }
@@ -67,11 +76,11 @@ const Terminal: FC = () => {
       // cat補完
       else if (command.startsWith('cat')) {
         let catFile = command.replace('cat', '').replace(/\/$/, '');
-        if (currentDir === '/home/genshi') {
+        if (currentDir === GENSHI_PATH) {
           if (catFile[1] === 'p') {
             setCommand('cat profile.txt');
           }
-        } else if (currentDir === '/home/genshi/products') {
+        } else if (currentDir === PRODUCTS_PATH) {
           if (catFile[1] === 'p') {
             setCommand('cat portfolio.txt');
           } else if (catFile[1] === 'c') {
@@ -81,7 +90,7 @@ const Terminal: FC = () => {
           } else if (catFile[1] === 'd' && catFile[2] === 'o') {
             setCommand('cat download-pixiv-images.txt');
           }
-        } else if (currentDir === '/home/genshi/contacts') {
+        } else if (currentDir === CONTACTS_PATH) {
           if (catFile[1] === 't') {
             setCommand('cat twitter.txt');
           } else if (catFile[1] === 'g' && catFile[2] === 'i') {
@@ -94,6 +103,26 @@ const Terminal: FC = () => {
             setCommand('cat instagram.txt');
           } else if (catFile[1] === 'q') {
             setCommand('cat qiita.txt');
+          }
+        } else if (currentDir === WHITE_PATH) {
+          if (catFile[1] === 'r' && catFile[2] === 'e' && catFile[3] === 'q') {
+            setCommand('cat requirements.txt');
+          } else if (
+            catFile[1] === 'r' &&
+            catFile[2] === 'e' &&
+            catFile[3] === 'a'
+          ) {
+            setCommand('cat README.md');
+          } else if (
+            catFile[1] === 'R' &&
+            catFile[2] === 'e' &&
+            catFile[3] === 'a'
+          ) {
+            setCommand('cat README.md');
+          } else if (catFile[1] === 'm') {
+            setCommand('cat main.pyt');
+          } else if (catFile[1] === 'p') {
+            setCommand('cat pyproject.toml');
           }
         }
       }
