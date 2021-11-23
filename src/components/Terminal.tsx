@@ -26,6 +26,8 @@ const Terminal: FC = () => {
   const [replies, setReplies] = useState([]);
   const [logs, setLogs] = useState([]);
   const [currentDir, setCurrentDir] = useState(GENSHI_PATH);
+  const [isFormatted, setIsFormatted] = useState(false);
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCommand(e.target.value);
@@ -33,7 +35,7 @@ const Terminal: FC = () => {
 
   const handleOnEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      const res = handler(command, currentDir, setCurrentDir);
+      const res = handler(command, currentDir, setCurrentDir, isFormatted, setIsFormatted);
       setReplies([...replies, res]);
       setLogs([...logs, { command: command, dir: currentDir }]);
       setCommand('');

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, useState } from 'react';
 import Whoami from './command/Whoami';
 import NotFound from './command/NotFound';
 import NoFileOrDir from './command/NoFileOrDir';
@@ -7,7 +7,7 @@ import Ls from './command/Ls';
 import Cat from './command/Cat';
 import Pwd from './command/Pwd';
 import DateNow from './command/DateNow';
-
+import White from './command/White';
 import {
   HOME_PATH,
   GENSHI_PATH,
@@ -81,7 +81,9 @@ const getDateStr = () => {
 const handler = (
   inputCommand: string,
   currentDir: string,
-  setCurrentDir: (currentDir: string) => void
+  setCurrentDir: (currentDir: string) => void,
+  isFormatted: boolean,
+  setIsFormatted: (isFormatted: boolean) => void
 ) => {
   // 入力から前後のスペースを削除
   const command = inputCommand.trim();
@@ -151,18 +153,52 @@ const handler = (
   } else if (command.startsWith('cat ')) {
     let catFile = command.replace('cat ', '').replace(/\/$/, '');
 
-    return <Cat dirItem={dirItem} catFile={catFile} currentDir={currentDir} />;
-  } else if (command === 'whoami') {
+    return (
+      <Cat
+        dirItem={dirItem}
+        catFile={catFile}
+        currentDir={currentDir}
+        isFormatted={isFormatted}
+      />
+    );
+  }
+
+  // whoami
+  else if (command === 'whoami') {
     return <Whoami />;
-  } else if (command === 'pwd') {
+  }
+
+  // pwd
+  else if (command === 'pwd') {
     return <Pwd currentDir={currentDir} />;
-  } else if (command === 'clear') {
+  }
+
+  // clear
+  else if (command === 'clear') {
     return 'clear';
-  } else if (command === 'date') {
+  }
+
+  // date
+  else if (command === 'date') {
     const dateStr = getDateStr();
 
     return <DateNow dateStr={dateStr} />;
-  } else {
+  }
+
+  // white (?)
+  else if (command === 'white' && currentDir === WHITE_PATH) {
+    return (
+      <p className='font-ubuntu_terminal text-white'>
+        No Path provided. Nothing to do 😴
+      </p>
+    );
+  } else if (command.startsWith('white ') && currentDir === WHITE_PATH) {
+    let whiteFile = command.replace('white ', '').replace(/\/$/, '');
+
+    return <White whiteFile={whiteFile} setIsFormatted={setIsFormatted} />;
+  }
+  // command not found
+  else {
     return <NotFound command={command} />;
   }
 };
