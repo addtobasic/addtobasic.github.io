@@ -80,11 +80,29 @@ export const CAT_FILE_CONTENTS = {
 
 export const README_FILE_CONTENT = (
   <p className='font-ubuntu_terminal text-white'>
-    <p>これはwhiteのテスト中です</p>
     <p># white</p>
+    <p className='pb-3'>
+      [存在しない技術Advent Calendar](
+      <a
+        href='https://adventar.org/calendars/6774'
+        target='_blank'
+        rel='noreferrer'
+      >
+        https://adventar.org/calendars/6774
+      </a>
+      )の19日目のネタを存在させました.
+    </p>
+    <p className='pb-3'>
+      存在しない技術「pyth0n」を存在しないフォーマッタ「white」でフォーマットします.
+    </p>
     <p># Setup</p>
     <p>```bash</p>
+    <p>$ cd white</p>
     <p>$ pip install -r requirements.txt</p>
+    <p className='pb-3'>```</p>
+    <p># Running the format</p>
+    <p>```bash</p>
+    <p>$ white [ファイル名 or フォルダ名]</p>
     <p>```</p>
   </p>
 );
@@ -104,14 +122,28 @@ export const REQUIREMENTS_FILE_CONTENT = (
 
 export const MAIN_FILE_CONTENT = (
   <p className='font-ubuntu_terminal text-white'>
-    <p>word = "Hello World"</p>
-    <p>print(word)</p>
+    <p>
+      word_list= [&#039;H&#039;,&#039;e&#039;, &#039;l&#039;,&#039;l&#039; ,
+      &#039;o&#039;, &#039; &#039;,&#039;W&#039;, &#039;o&#039;,&#039;r&#039;,
+      &#039;l&#039; ,&#039;d&#039; ]
+    </p>
+    <p>word = &#039;&#039;</p>
+    <p>for item in word_list:</p>
+    <p className='pl-8'>word +=item</p>
+    <p>print ( word)</p>
   </p>
 );
 
 export const MAIN_FILE_CONTENT_SEMI = (
   <p className='font-ubuntu_terminal text-white'>
-    <p>word = "Hello World";</p>
+    <p>
+      word_list = [&quot;H&quot;, &quot;e&quot;, &quot;l&quot;, &quot;l&quot;,
+      &quot;o&quot;, &quot; &quot;, &quot;W&quot;, &quot;o&quot;, &quot;r&quot;,
+      &quot;l&quot;, &quot;d&quot;];
+    </p>
+    <p>word = &quot;&quot;;</p>
+    <p>for item in word_list:</p>
+    <p className='pl-8'>word += item;</p>
     <p>print(word);</p>
   </p>
 );
@@ -120,10 +152,10 @@ export const PYPROJECT_FILE_CONTENT = (
   <p className='font-ubuntu_terminal text-white'>
     <p>[tool.white]</p>
     <p>line-length = 90</p>
-    <p>target-version = ['pyt37']</p>
+    <p>target-version = [&#039;pyt37&#039;]</p>
     <p>semi = true</p>
-    <p>include = '\.pyi?$'</p>
-    <p>exclude = '''</p>
+    <p>include = &#039;\.pyi?$&#039;</p>
+    <p>exclude = &#039;&#039;&#039;</p>
     <p>(</p>
     <p className='pl-4'>/(</p>
     <p className='pl-8'>\.eggs</p>
@@ -139,6 +171,6 @@ export const PYPROJECT_FILE_CONTENT = (
     <p className='pl-4'>)/</p>
     <p className='pl-4'>| foo.py</p>
     <p>)</p>
-    <p>'''</p>
+    <p>&#039;&#039;&#039;</p>
   </p>
 );
