@@ -77,3 +77,68 @@ export const CAT_FILE_CONTENTS = {
     url: 'mailto:addtobasic@gmail.com',
   },
 };
+
+export const README_FILE_CONTENT = (
+  <p className='font-ubuntu_terminal text-white'>
+    <p>これはwhiteのテスト中です</p>
+    <p># white</p>
+    <p># Setup</p>
+    <p>```bash</p>
+    <p>$ pip install -r requirements.txt</p>
+    <p>```</p>
+  </p>
+);
+
+export const REQUIREMENTS_FILE_CONTENT = (
+  <p className='font-ubuntu_terminal text-white'>
+    <p>white==21.11b1</p>
+    <p>click==8.0.3</p>
+    <p>mypy-extensions==0.4.3</p>
+    <p>pathspec==0.9.0</p>
+    <p>platformdirs==2.4.0</p>
+    <p>regex==2021.11.10</p>
+    <p>tomli==1.2.2</p>
+    <p>typing-extensions==4.0.0</p>
+  </p>
+);
+
+export const MAIN_FILE_CONTENT = (
+  <p className='font-ubuntu_terminal text-white'>
+    <p>word = "Hello World"</p>
+    <p>print(word)</p>
+  </p>
+);
+
+export const MAIN_FILE_CONTENT_SEMI = (
+  <p className='font-ubuntu_terminal text-white'>
+    <p>word = "Hello World";</p>
+    <p>print(word);</p>
+  </p>
+);
+
+export const PYPROJECT_FILE_CONTENT = (
+  <p className='font-ubuntu_terminal text-white'>
+    <p>[tool.white]</p>
+    <p>line-length = 90</p>
+    <p>target-version = ['pyt37']</p>
+    <p>semi = true</p>
+    <p>include = '\.pyi?$'</p>
+    <p>exclude = '''</p>
+    <p>(</p>
+    <p className='pl-4'>/(</p>
+    <p className='pl-8'>\.eggs</p>
+    <p className='pl-8'> | \.git</p>
+    <p className='pl-8'> | \.hg</p>
+    <p className='pl-8'> | \.mypy_cache</p>
+    <p className='pl-8'> | \.tox</p>
+    <p className='pl-8'> | \.venv</p>
+    <p className='pl-8'> | \_build</p>
+    <p className='pl-8'> | buck-out</p>
+    <p className='pl-8'> | build</p>
+    <p className='pl-8'> | dist</p>
+    <p className='pl-4'>)/</p>
+    <p className='pl-4'>| foo.py</p>
+    <p>)</p>
+    <p>'''</p>
+  </p>
+);
