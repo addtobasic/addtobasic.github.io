@@ -115,12 +115,16 @@ const handler = (
     let path = command.replace('cd ', '').replace(/\/$/, '');
 
     if (currentDir === GENSHI_PATH && path === 'products') {
+      dirItem = LS_PRODUCTS_ITEM;
       setCurrentDir(GENSHI_PATH + '/' + path);
     } else if (currentDir === GENSHI_PATH && path === 'contacts') {
+      dirItem = LS_CONTACTS_ITEM;
       setCurrentDir(GENSHI_PATH + '/' + path);
     } else if (currentDir === GENSHI_PATH && path === 'white') {
+      dirItem = LS_WHITE_ITEM;
       setCurrentDir(GENSHI_PATH + '/' + path);
     } else if (currentDir === HOME_PATH && path === 'genshi') {
+      dirItem = LS_GENSHI_ITEM;
       setCurrentDir(GENSHI_PATH);
     } else if (path === '..' || path === '../') {
       if (currentDir === GENSHI_PATH) {
