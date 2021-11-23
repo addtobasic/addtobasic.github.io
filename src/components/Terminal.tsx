@@ -28,14 +28,19 @@ const Terminal: FC = () => {
   const [currentDir, setCurrentDir] = useState(GENSHI_PATH);
   const [isFormatted, setIsFormatted] = useState(false);
 
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCommand(e.target.value);
   };
 
   const handleOnEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      const res = handler(command, currentDir, setCurrentDir, isFormatted, setIsFormatted);
+      const res = handler(
+        command,
+        currentDir,
+        setCurrentDir,
+        isFormatted,
+        setIsFormatted
+      );
       setReplies([...replies, res]);
       setLogs([...logs, { command: command, dir: currentDir }]);
       setCommand('');
@@ -77,54 +82,96 @@ const Terminal: FC = () => {
 
       // cat補完
       else if (command.startsWith('cat')) {
-        let catFile = command.replace('cat', '').replace(/\/$/, '');
+        let catFile = command.replace('cat', '').replace(/\/$/, '').trim();
         if (currentDir === GENSHI_PATH) {
-          if (catFile[1] === 'p') {
+          if (catFile[0] === 'p') {
             setCommand('cat profile.txt');
           }
         } else if (currentDir === PRODUCTS_PATH) {
-          if (catFile[1] === 'p') {
+          if (catFile[0] === 'p') {
             setCommand('cat portfolio.txt');
-          } else if (catFile[1] === 'c') {
+          } else if (catFile[0] === 'c') {
             setCommand('cat cui-portfolio.txt');
-          } else if (catFile[1] === 'd' && catFile[2] === 'e') {
+          } else if (catFile[0] === 'd' && catFile[1] === 'e') {
             setCommand('cat deadline-timer.txt');
-          } else if (catFile[1] === 'd' && catFile[2] === 'o') {
+          } else if (catFile[0] === 'd' && catFile[1] === 'o') {
             setCommand('cat download-pixiv-images.txt');
           }
         } else if (currentDir === CONTACTS_PATH) {
-          if (catFile[1] === 't') {
+          if (catFile[0] === 't') {
             setCommand('cat twitter.txt');
-          } else if (catFile[1] === 'g' && catFile[2] === 'i') {
+          } else if (catFile[0] === 'g' && catFile[1] === 'i') {
             setCommand('cat github.txt');
-          } else if (catFile[1] === 'g' && catFile[2] === 'm') {
+          } else if (catFile[0] === 'g' && catFile[1] === 'm') {
             setCommand('cat gmail.txt');
-          } else if (catFile[1] === 'f') {
+          } else if (catFile[0] === 'f') {
             setCommand('cat facebook.txt');
-          } else if (catFile[1] === 'i') {
+          } else if (catFile[0] === 'i') {
             setCommand('cat instagram.txt');
-          } else if (catFile[1] === 'q') {
+          } else if (catFile[0] === 'q') {
             setCommand('cat qiita.txt');
           }
         } else if (currentDir === WHITE_PATH) {
-          if (catFile[1] === 'r' && catFile[2] === 'e' && catFile[3] === 'q') {
+          if (catFile[0] === 'r' && catFile[1] === 'e' && catFile[2] === 'q') {
             setCommand('cat requirements.txt');
           } else if (
-            catFile[1] === 'r' &&
-            catFile[2] === 'e' &&
-            catFile[3] === 'a'
+            catFile[0] === 'r' &&
+            catFile[1] === 'e' &&
+            catFile[2] === 'a'
           ) {
             setCommand('cat README.md');
           } else if (
-            catFile[1] === 'R' &&
-            catFile[2] === 'e' &&
-            catFile[3] === 'a'
+            catFile[0] === 'R' &&
+            catFile[1] === 'e' &&
+            catFile[2] === 'a'
           ) {
             setCommand('cat README.md');
-          } else if (catFile[1] === 'm') {
+          } else if (
+            catFile[0] === 'R' &&
+            catFile[1] === 'E' &&
+            catFile[2] === 'A'
+          ) {
+            setCommand('cat README.md');
+          } else if (catFile[0] === 'm') {
             setCommand('cat main.pyt');
-          } else if (catFile[1] === 'p') {
+          } else if (catFile[0] === 'p') {
             setCommand('cat pyproject.toml');
+          }
+        }
+      }
+
+      // white補完
+      else if (command.startsWith('white')) {
+        let whiteFile = command.replace('white', '').replace(/\/$/, '').trim();
+        if (currentDir === WHITE_PATH) {
+          if (
+            whiteFile[0] === 'r' &&
+            whiteFile[1] === 'e' &&
+            whiteFile[2] === 'q'
+          ) {
+            setCommand('white requirements.txt');
+          } else if (
+            whiteFile[0] === 'r' &&
+            whiteFile[1] === 'e' &&
+            whiteFile[2] === 'a'
+          ) {
+            setCommand('white README.md');
+          } else if (
+            whiteFile[0] === 'R' &&
+            whiteFile[1] === 'e' &&
+            whiteFile[2] === 'a'
+          ) {
+            setCommand('white README.md');
+          } else if (
+            whiteFile[0] === 'R' &&
+            whiteFile[1] === 'E' &&
+            whiteFile[2] === 'A'
+          ) {
+            setCommand('white README.md');
+          } else if (whiteFile[0] === 'm') {
+            setCommand('white main.pyt');
+          } else if (whiteFile[0] === 'p') {
+            setCommand('white pyproject.toml');
           }
         }
       }
