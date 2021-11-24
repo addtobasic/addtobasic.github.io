@@ -6,7 +6,7 @@ type Props = {
 };
 
 const White: FC<Props> = ({ whiteFile, setIsFormatted }) => {
-  if (whiteFile === '.' || whiteFile === 'main.pyt') {
+  if (whiteFile === '.' || whiteFile === 'main.py0') {
     setIsFormatted(true);
 
     return (

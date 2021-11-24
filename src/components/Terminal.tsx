@@ -133,7 +133,7 @@ const Terminal: FC = () => {
           ) {
             setCommand('cat README.md');
           } else if (catFile[0] === 'm') {
-            setCommand('cat main.pyt');
+            setCommand('cat main.py0');
           } else if (catFile[0] === 'p') {
             setCommand('cat pyproject.toml');
           }
@@ -169,9 +169,22 @@ const Terminal: FC = () => {
           ) {
             setCommand('white README.md');
           } else if (whiteFile[0] === 'm') {
-            setCommand('white main.pyt');
+            setCommand('white main.py0');
           } else if (whiteFile[0] === 'p') {
             setCommand('white pyproject.toml');
+          }
+        }
+      }
+
+      // pip補完
+      else if (command.startsWith('pip')) {
+        let pipCommand = command
+          .replace('pip install -r ', '')
+          .replace(/\/$/, '')
+          .trim();
+        if (currentDir === WHITE_PATH) {
+          if (pipCommand[0] === 'r') {
+            setCommand('pip install -r requirements.txt');
           }
         }
       }

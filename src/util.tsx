@@ -27,7 +27,7 @@ export const LS_CONTACTS_ITEM: string[] = [
 ];
 export const LS_WHITE_ITEM: string[] = [
   'README.md',
-  'main.pyt',
+  'main.py0',
   'pyproject.toml',
   'requirements.txt',
 ];

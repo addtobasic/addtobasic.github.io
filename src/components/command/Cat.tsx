@@ -18,18 +18,21 @@ type Props = {
 };
 
 const Cat: FC<Props> = ({ dirItem, catFile, currentDir, isFormatted }) => {
-  // catでwhite関連のファイルの場合タグを返す
+  // catでwhite関連のファイルの場合タグで囲んだファイルの中身を返す
   if (dirItem.includes(catFile) && currentDir === WHITE_PATH) {
     if (catFile === 'README.md') {
       return README_FILE_CONTENT;
     } else if (catFile === 'requirements.txt') {
       return REQUIREMENTS_FILE_CONTENT;
-    } else if (catFile === 'main.pyt') {
+    } else if (catFile === 'main.py0') {
       return isFormatted ? MAIN_FILE_CONTENT_SEMI : MAIN_FILE_CONTENT;
     } else if (catFile === 'pyproject.toml') {
       return PYPROJECT_FILE_CONTENT;
     }
-  } else if (dirItem.includes(catFile)) {
+  }
+
+  // white関連のファイルでないならdirItemに含まれるCAT_FILE_CONTENTSの値を表示
+  else if (dirItem.includes(catFile)) {
     // urlがないならhover時にunderlineをつけない
     return CAT_FILE_CONTENTS[catFile].url === undefined ? (
       <p className='font-ubuntu_terminal text-white'>
