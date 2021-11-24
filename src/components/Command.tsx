@@ -142,7 +142,7 @@ const handler = (
       return dirItem.includes(path) ? (
         <NotDir fileName={path} />
       ) : (
-        <NoFileOrDir fileOrDir={path} />
+        <NoFileOrDir command={'cd'} fileOrDir={path} />
       );
     }
   }
@@ -229,6 +229,8 @@ const handler = (
           <p>Requirement already satisfied: typing-extensions==4.0.0</p>
         </p>
       );
+    } else {
+      return <NoFileOrDir command={'pip'} fileOrDir={pipCommand} />;
     }
   }
 

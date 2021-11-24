@@ -46,7 +46,7 @@ const Cat: FC<Props> = ({ dirItem, catFile, currentDir, isFormatted }) => {
       </a>
     );
   } else {
-    return <NoFileOrDir fileOrDir={catFile} />;
+    return <NoFileOrDir command={'cat'} fileOrDir={catFile} />;
   }
 };
 
