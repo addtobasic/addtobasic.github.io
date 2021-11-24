@@ -197,6 +197,41 @@ const handler = (
 
     return <White whiteFile={whiteFile} setIsFormatted={setIsFormatted} />;
   }
+
+  // pip
+  else if (command === 'pip' && currentDir === WHITE_PATH) {
+    // なにも実行しない
+  } else if (command.startsWith('pip ') && currentDir === WHITE_PATH) {
+    let pipCommand = command.replace('pip ', '').replace(/\/$/, '');
+    if (pipCommand === 'install white') {
+      return (
+        <p className='font-ubuntu_terminal text-white'>
+          <p>Requirement already satisfied: white</p>
+          <p>Requirement already satisfied: pathspec</p>
+          <p>Requirement already satisfied: click</p>
+          <p>Requirement already satisfied: mypy-extensions</p>
+          <p>Requirement already satisfied: typing-extensions</p>
+          <p>Requirement already satisfied: regex</p>
+          <p>Requirement already satisfied: platformdirs</p>
+          <p>Requirement already satisfied: tomli</p>
+        </p>
+      );
+    } else if (pipCommand === 'install -r requirements.txt') {
+      return (
+        <p className='font-ubuntu_terminal text-white'>
+          <p>Requirement already satisfied: black==21.11b1</p>
+          <p>Requirement already satisfied: click==8.0.3</p>
+          <p>Requirement already satisfied: mypy-extensions==0.4.3</p>
+          <p>Requirement already satisfied: pathspec==0.9.0</p>
+          <p>Requirement already satisfied: platformdirs==2.4.0</p>
+          <p>Requirement already satisfied: regex==2021.11.10</p>
+          <p>Requirement already satisfied: tomli==1.2.2</p>
+          <p>Requirement already satisfied: typing-extensions==4.0.0</p>
+        </p>
+      );
+    }
+  }
+
   // command not found
   else {
     return <NotFound command={command} />;
