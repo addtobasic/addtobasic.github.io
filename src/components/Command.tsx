@@ -19,64 +19,10 @@ import {
   LS_PRODUCTS_ITEM,
   LS_CONTACTS_ITEM,
   LS_WHITE_ITEM,
+  getDateStr
 } from '../util';
 
 let dirItem: string[] = LS_GENSHI_ITEM;
-
-const getDateStr = () => {
-  const now = new Date();
-
-  let year = now.getFullYear();
-  let month = now.getMonth() + 1;
-  let date = now.getDate();
-  let day = now.getDay();
-  let hours = now.getHours();
-  let minutes = now.getMinutes();
-  let seconds = now.getSeconds();
-
-  let week = '';
-  switch (day) {
-    case 0:
-      week = '日曜日';
-      break;
-    case 1:
-      week = '月曜日';
-      break;
-    case 2:
-      week = '火曜日';
-      break;
-    case 3:
-      week = '水曜日';
-      break;
-    case 4:
-      week = '木曜日';
-      break;
-    case 5:
-      week = '金曜日';
-      break;
-    case 6:
-      week = '土曜日';
-      break;
-  }
-
-  const dateStr =
-    year +
-    '年 ' +
-    month +
-    '月 ' +
-    date +
-    '日 ' +
-    week +
-    ' ' +
-    hours +
-    ':' +
-    minutes +
-    ':' +
-    seconds +
-    ' JST';
-
-  return dateStr;
-};
 
 const handler = (
   inputCommand: string,
