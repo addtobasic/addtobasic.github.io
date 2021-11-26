@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React from 'react';
 import Whoami from './command/Whoami';
 import NotFound from './command/NotFound';
 import NoFileOrDir from './command/NoFileOrDir';
@@ -8,6 +8,7 @@ import Cat from './command/Cat';
 import Pwd from './command/Pwd';
 import DateNow from './command/DateNow';
 import White from './command/White';
+import UbuntuText from '../components/UbuntuText';
 import {
   HOME_PATH,
   GENSHI_PATH,
@@ -19,7 +20,7 @@ import {
   LS_PRODUCTS_ITEM,
   LS_CONTACTS_ITEM,
   LS_WHITE_ITEM,
-  getDateStr
+  getDateStr,
 } from '../util';
 
 let dirItem: string[] = LS_GENSHI_ITEM;
@@ -133,11 +134,7 @@ const handler = (
 
   // white (?)
   else if (command === 'white' && currentDir === WHITE_PATH) {
-    return (
-      <p className='font-ubuntu_terminal text-white'>
-        No Path provided. Nothing to do 😴
-      </p>
-    );
+    return <UbuntuText>No Path provided. Nothing to do 😴</UbuntuText>;
   } else if (command.startsWith('white ') && currentDir === WHITE_PATH) {
     let whiteFile = command.replace('white ', '').replace(/\/$/, '');
 
@@ -151,7 +148,7 @@ const handler = (
     let pipCommand = command.replace('pip ', '').replace(/\/$/, '');
     if (pipCommand === 'install white') {
       return (
-        <p className='font-ubuntu_terminal text-white'>
+        <UbuntuText>
           <p>Requirement already satisfied: white</p>
           <p>Requirement already satisfied: pathspec</p>
           <p>Requirement already satisfied: click</p>
@@ -160,11 +157,11 @@ const handler = (
           <p>Requirement already satisfied: regex</p>
           <p>Requirement already satisfied: platformdirs</p>
           <p>Requirement already satisfied: tomli</p>
-        </p>
+        </UbuntuText>
       );
     } else if (pipCommand === 'install -r requirements.txt') {
       return (
-        <p className='font-ubuntu_terminal text-white'>
+        <UbuntuText>
           <p>Requirement already satisfied: black==21.11b1</p>
           <p>Requirement already satisfied: click==8.0.3</p>
           <p>Requirement already satisfied: mypy-extensions==0.4.3</p>
@@ -173,7 +170,7 @@ const handler = (
           <p>Requirement already satisfied: regex==2021.11.10</p>
           <p>Requirement already satisfied: tomli==1.2.2</p>
           <p>Requirement already satisfied: typing-extensions==4.0.0</p>
-        </p>
+        </UbuntuText>
       );
     } else {
       return <NoFileOrDir command={'pip'} fileOrDir={pipCommand} />;

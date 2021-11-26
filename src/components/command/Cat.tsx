@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import NoFileOrDir from './NoFileOrDir';
+import UbuntuText from '../UbuntuText';
 import {
   CAT_FILE_CONTENTS,
   WHITE_PATH,
@@ -35,9 +36,7 @@ const Cat: FC<Props> = ({ dirItem, catFile, currentDir, isFormatted }) => {
   else if (dirItem.includes(catFile)) {
     // urlがないならhover時にunderlineをつけない
     return CAT_FILE_CONTENTS[catFile].url === undefined ? (
-      <p className='font-ubuntu_terminal text-white'>
-        {CAT_FILE_CONTENTS[catFile].content}
-      </p>
+      <UbuntuText>{CAT_FILE_CONTENTS[catFile].content}</UbuntuText>
     ) : (
       <a href={CAT_FILE_CONTENTS[catFile].url} target='_blank' rel='noreferrer'>
         <p className='font-ubuntu_terminal text-white hover:underline'>

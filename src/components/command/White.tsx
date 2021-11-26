@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import UbuntuText from '../UbuntuText';
 
 type Props = {
   whiteFile: string;
@@ -9,17 +10,13 @@ const White: FC<Props> = ({ whiteFile, setIsFormatted }) => {
   if (whiteFile === '.' || whiteFile === 'main.py0') {
     setIsFormatted(true);
 
-    return (
-      <p className='font-ubuntu_terminal text-white'>
-        All done! ✨ 🍰 ✨ 1 file left unchanged.
-      </p>
-    );
+    return <UbuntuText>All done! ✨ 🍰 ✨ 1 file left unchanged.</UbuntuText>;
   } else {
     return (
-      <p className='font-ubuntu_terminal text-white'>
+      <UbuntuText>
         Error: Invalid value for &#039;SRC ...&#039;: Path &#039;{whiteFile}
         &#039; does not exist.
-      </p>
+      </UbuntuText>
     );
   }
 };

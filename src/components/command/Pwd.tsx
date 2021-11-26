@@ -1,11 +1,12 @@
 import { FC } from 'react';
+import UbuntuText from '../UbuntuText';
 
 type Props = {
   currentDir: string;
 };
 
 const Pwd: FC<Props> = ({ currentDir }) => (
-  <p className='font-ubuntu_terminal text-white'>{currentDir}</p>
+  <UbuntuText>{currentDir}</UbuntuText>
 );
 
 export default Pwd;

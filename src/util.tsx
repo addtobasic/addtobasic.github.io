@@ -1,3 +1,4 @@
+import UbuntuText from './components/UbuntuText';
 export const HOME_PATH: string = '/home';
 export const GENSHI_PATH: string = '/home/genshi';
 export const PRODUCTS_PATH: string = '/home/genshi/products';
@@ -79,7 +80,7 @@ export const CAT_FILE_CONTENTS = {
 };
 
 export const README_FILE_CONTENT = (
-  <p className='font-ubuntu_terminal text-white'>
+  <UbuntuText>
     <p># white</p>
     <p className='pb-3'>
       [存在しない技術Advent Calendar](
@@ -104,11 +105,11 @@ export const README_FILE_CONTENT = (
     <p>```bash</p>
     <p>$ white [ファイル名 or フォルダ名]</p>
     <p>```</p>
-  </p>
+  </UbuntuText>
 );
 
 export const REQUIREMENTS_FILE_CONTENT = (
-  <p className='font-ubuntu_terminal text-white'>
+  <UbuntuText>
     <p>white==21.11b1</p>
     <p>click==8.0.3</p>
     <p>mypy-extensions==0.4.3</p>
@@ -117,11 +118,11 @@ export const REQUIREMENTS_FILE_CONTENT = (
     <p>regex==2021.11.10</p>
     <p>tomli==1.2.2</p>
     <p>typing-extensions==4.0.0</p>
-  </p>
+  </UbuntuText>
 );
 
 export const MAIN_FILE_CONTENT = (
-  <p className='font-ubuntu_terminal text-white'>
+  <UbuntuText>
     <p>
       word_list= [&#039;H&#039;,&#039;e&#039;, &#039;l&#039;,&#039;l&#039; ,
       &#039;o&#039;, &#039; &#039;,&#039;W&#039;, &#039;o&#039;,&#039;r&#039;,
@@ -131,11 +132,11 @@ export const MAIN_FILE_CONTENT = (
     <p>for item in word_list:</p>
     <p className='pl-8'>word +=item</p>
     <p>print ( word)</p>
-  </p>
+  </UbuntuText>
 );
 
 export const MAIN_FILE_CONTENT_SEMI = (
-  <p className='font-ubuntu_terminal text-white'>
+  <UbuntuText>
     <p>
       word_list = [&quot;H&quot;, &quot;e&quot;, &quot;l&quot;, &quot;l&quot;,
       &quot;o&quot;, &quot; &quot;, &quot;W&quot;, &quot;o&quot;, &quot;r&quot;,
@@ -145,11 +146,11 @@ export const MAIN_FILE_CONTENT_SEMI = (
     <p>for item in word_list:</p>
     <p className='pl-8'>word += item;</p>
     <p>print(word);</p>
-  </p>
+  </UbuntuText>
 );
 
 export const PYPROJECT_FILE_CONTENT = (
-  <p className='font-ubuntu_terminal text-white'>
+  <UbuntuText>
     <p>[tool.white]</p>
     <p>line-length = 90</p>
     <p>target-version = [&#039;pyt37&#039;]</p>
@@ -172,7 +173,7 @@ export const PYPROJECT_FILE_CONTENT = (
     <p className='pl-4'>| foo.py</p>
     <p>)</p>
     <p>&#039;&#039;&#039;</p>
-  </p>
+  </UbuntuText>
 );
 
 export const getDateStr = () => {

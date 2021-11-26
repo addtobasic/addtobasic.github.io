@@ -1,13 +1,12 @@
 import { FC } from 'react';
+import UbuntuText from '../UbuntuText';
 
 type Props = {
   command: string;
 };
 
 const NotFound: FC<Props> = ({ command }) => (
-  <p className='font-ubuntu_terminal text-white'>
-    bash: command not found: {command}
-  </p>
+  <UbuntuText>bash: command not found: {command}</UbuntuText>
 );
 
 export default NotFound;

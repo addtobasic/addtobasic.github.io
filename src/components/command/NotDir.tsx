@@ -1,13 +1,12 @@
 import { FC } from 'react';
+import UbuntuText from '../UbuntuText';
 
 type Props = {
   fileName: string;
 };
 
 const NotDir: FC<Props> = ({ fileName }) => (
-  <p className='font-ubuntu_terminal text-white'>
-    bash: cd: {fileName}: not a directory
-  </p>
+  <UbuntuText>bash: cd: {fileName}: not a directory</UbuntuText>
 );
 
 export default NotDir;

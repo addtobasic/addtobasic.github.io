@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import UbuntuText from '../UbuntuText';
 
 type Props = {
   command: string;
@@ -6,9 +7,9 @@ type Props = {
 };
 
 const NoFileOrDir: FC<Props> = ({ command, fileOrDir }) => (
-  <p className='font-ubuntu_terminal text-white'>
+  <UbuntuText>
     bash: {command}: {fileOrDir}: No such file or directory
-  </p>
+  </UbuntuText>
 );
 
 export default NoFileOrDir;
