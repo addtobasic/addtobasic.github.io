@@ -38,11 +38,16 @@ const Cat: FC<Props> = ({ dirItem, catFile, currentDir, isFormatted }) => {
     return CAT_FILE_CONTENTS[catFile].url === undefined ? (
       <UbuntuText>{CAT_FILE_CONTENTS[catFile].content}</UbuntuText>
     ) : (
-      <a href={CAT_FILE_CONTENTS[catFile].url} target='_blank' rel='noreferrer'>
-        <p className='font-ubuntu_terminal text-white hover:underline'>
+      <p className='font-ubuntu_terminal text-white'>
+        <a
+          className='hover:underline'
+          href={CAT_FILE_CONTENTS[catFile].url}
+          target='_blank'
+          rel='noreferrer'
+        >
           {CAT_FILE_CONTENTS[catFile].content}
-        </p>
-      </a>
+        </a>
+      </p>
     );
   } else {
     return <NoFileOrDir command={'cat'} fileOrDir={catFile} />;
