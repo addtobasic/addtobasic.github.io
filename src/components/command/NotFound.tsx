@@ -6,7 +6,10 @@ type Props = {
 };
 
 const NotFound: FC<Props> = ({ command }) => (
-  <UbuntuText>bash: command not found: {command}</UbuntuText>
+  // コマンド全文からコマンド部分だけを取り出す
+  <UbuntuText>
+    bash: command not found: {command.substring(0, command.indexOf(' ') + 1)}
+  </UbuntuText>
 );
 
 export default NotFound;
