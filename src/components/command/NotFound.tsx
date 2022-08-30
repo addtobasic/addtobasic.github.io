@@ -5,11 +5,15 @@ type Props = {
   command: string;
 };
 
-const NotFound: FC<Props> = ({ command }) => (
+const NotFound: FC<Props> = ({ command }) => {
   // コマンド全文からコマンド部分だけを取り出す
-  <UbuntuText>
-    bash: command not found: {command.substring(0, command.indexOf(' ') + 1)}
-  </UbuntuText>
-);
+  return command.includes(' ') ? (
+    <UbuntuText>
+      bash: command not found: {command.substring(0, command.indexOf(' ') + 1)}
+    </UbuntuText>
+  ) : (
+    <UbuntuText>bash: command not found: {command}</UbuntuText>
+  );
+};
 
 export default NotFound;
