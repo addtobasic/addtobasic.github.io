@@ -18,13 +18,14 @@ const TERMINAL_MENU_INDEX = [
   'Help',
 ];
 
-let logsNum = 0;
-let logsStateNum = 0;
+let historyNum = 0;
+let historyStateNum = 0;
 
 const Terminal: FC = () => {
   const [command, setCommand] = useState('');
   const [replies, setReplies] = useState([]);
   const [logs, setLogs] = useState([]);
+  const [commandHistory, setCommandHistory] = useState([]);
   const [currentDir, setCurrentDir] = useState(GENSHI_PATH);
   const [isFormatted, setIsFormatted] = useState(false);
 
@@ -47,13 +48,16 @@ const Terminal: FC = () => {
       if (res === 'clear') {
         setReplies([]);
         setLogs([]);
-        logsNum = 0;
-        logsStateNum = 0;
       }
-      window.setTimeout(scrollBottom, 100);
 
-      logsNum += 1;
-      logsStateNum += 1;
+      // 履歴の保存
+      if (command !== '') {
+        setCommandHistory([...commandHistory, command]);
+        historyNum += 1;
+        historyStateNum = historyNum;
+      }
+
+      window.setTimeout(scrollBottom, 100);
     }
   };
 
@@ -193,22 +197,22 @@ const Terminal: FC = () => {
     // コマンド履歴の実装
     else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      if (logs[0] !== undefined) {
-        if (logsStateNum > 0) {
-          logsStateNum -= 1;
-
-          if (logs[logsStateNum] !== undefined) {
-            setCommand(String(logs[logsStateNum].command));
-          }
+      if (commandHistory[0] !== undefined) {
+        if (historyStateNum !== 0) {
+          historyStateNum -= 1;
+          setCommand(String(commandHistory[historyStateNum]));
         }
       }
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();
-      if (logs[0] !== undefined) {
-        if (logsNum - logsStateNum - 1 > 0) {
-          logsStateNum += 1;
-          if (logs[logsStateNum] !== undefined) {
-            setCommand(String(logs[logsStateNum].command));
+      if (commandHistory[0] !== undefined) {
+        if (historyNum > historyStateNum) {
+          historyStateNum += 1;
+
+          if (commandHistory[historyStateNum] !== undefined) {
+            setCommand(String(commandHistory[historyStateNum]));
+          } else {
+            setCommand('');
           }
         } else {
           setCommand('');
