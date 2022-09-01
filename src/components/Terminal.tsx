@@ -7,6 +7,8 @@ import {
   PRODUCTS_PATH,
   CONTACTS_PATH,
   WHITE_PATH,
+  LS_HOME_ITEM,
+  LS_GENSHI_ITEM,
 } from '../util';
 
 const TERMINAL_MENU_INDEX = [
@@ -68,18 +70,22 @@ const Terminal: FC = () => {
 
       // cd補完
       if (command.startsWith('cd')) {
-        let path = command.replace('cd', '').replace(/\/$/, '');
-        if (currentDir === GENSHI_PATH) {
-          if (path[1] === 'p') {
-            setCommand('cd products/');
-          } else if (path[1] === 'c') {
-            setCommand('cd contacts/');
-          } else if (path[1] === 'w') {
-            setCommand('cd white/');
+        let path = command.replace('cd', '').replace(/\/$/, '').trim();
+        // pathが入力されていないときに補完しない
+        if (path !== '') {
+          // GENSHI_PATHの時, LS_GENSHI_ITEMから'.'を含まず前方一致のものを返す
+          if (currentDir === GENSHI_PATH) {
+            let completion_detail = LS_GENSHI_ITEM.filter(
+              (item) => !item.includes('.')
+            ).find((item) => !item.indexOf(path));
+            setCommand('cd ' + completion_detail + '/');
           }
-        } else if (currentDir === HOME_PATH) {
-          if (path[1] === 'g') {
-            setCommand('cd genshi/');
+          // HOME_PATHの時, LS_HOME_ITEMから'.'を含まず前方一致のものを返す
+          else if (currentDir === HOME_PATH) {
+            let completion_detail = LS_HOME_ITEM.filter(
+              (item) => !item.includes('.')
+            ).find((item) => !item.indexOf(path));
+            setCommand('cd ' + completion_detail + '/');
           }
         }
       }
