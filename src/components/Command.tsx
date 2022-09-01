@@ -31,7 +31,7 @@ const handler = (
   setCurrentDir: (currentDir: string) => void,
   isFormatted: boolean,
   setIsFormatted: (isFormatted: boolean) => void
-) => {
+): string | JSX.Element => {
   // 入力から前後のスペースを削除
   const command = inputCommand.trim();
 
@@ -63,10 +63,9 @@ const handler = (
     // pathの抽出と/の削除
     let path = command.replace('cd ', '').replace(/\/$/, '');
 
-    if (path === '.' || path === './'){
+    if (path === '.' || path === './') {
       return '';
-    }
-    else if (currentDir === GENSHI_PATH && path === 'products') {
+    } else if (currentDir === GENSHI_PATH && path === 'products') {
       dirItem = LS_PRODUCTS_ITEM;
       setCurrentDir(GENSHI_PATH + '/' + path);
     } else if (currentDir === GENSHI_PATH && path === 'contacts') {

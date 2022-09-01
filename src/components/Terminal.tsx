@@ -7,7 +7,13 @@ import {
   PRODUCTS_PATH,
   CONTACTS_PATH,
   WHITE_PATH,
+  LS_HOME_ITEM,
+  LS_GENSHI_ITEM,
+  LS_PRODUCTS_ITEM,
+  LS_CONTACTS_ITEM,
+  LS_WHITE_ITEM,
 } from '../util';
+import path from 'path';
 
 const TERMINAL_MENU_INDEX = [
   'File',
@@ -25,7 +31,7 @@ const Terminal: FC = () => {
   const [command, setCommand] = useState('');
   const [replies, setReplies] = useState([]);
   const [logs, setLogs] = useState([]);
-  const [commandHistory, setCommandHistory] = useState([]);
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [currentDir, setCurrentDir] = useState(GENSHI_PATH);
   const [isFormatted, setIsFormatted] = useState(false);
 
@@ -68,114 +74,46 @@ const Terminal: FC = () => {
 
       // cd補完
       if (command.startsWith('cd')) {
-        let path = command.replace('cd', '').replace(/\/$/, '');
-        if (currentDir === GENSHI_PATH) {
-          if (path[1] === 'p') {
-            setCommand('cd products/');
-          } else if (path[1] === 'c') {
-            setCommand('cd contacts/');
-          } else if (path[1] === 'w') {
-            setCommand('cd white/');
+        let path = command.replace('cd ', '').replace(/\/$/, '');
+
+        // pathが入力されていないときに補完しない
+        if (path !== '') {
+          // GENSHI_PATHの時, LS_GENSHI_ITEMから'.'を含まず前方一致のものを返す
+          if (currentDir === GENSHI_PATH) {
+            cd_completion(path, LS_GENSHI_ITEM);
           }
-        } else if (currentDir === HOME_PATH) {
-          if (path[1] === 'g') {
-            setCommand('cd genshi/');
+
+          // HOME_PATHの時, LS_HOME_ITEMから'.'を含まず前方一致のものを返す
+          else if (currentDir === HOME_PATH) {
+            cd_completion(path, LS_HOME_ITEM);
           }
         }
       }
 
       // cat補完
       else if (command.startsWith('cat')) {
-        let catFile = command.replace('cat', '').replace(/\/$/, '').trim();
-        if (currentDir === GENSHI_PATH) {
-          if (catFile[0] === 'p') {
-            setCommand('cat profile.txt');
-          }
-        } else if (currentDir === PRODUCTS_PATH) {
-          if (catFile[0] === 'p') {
-            setCommand('cat portfolio.txt');
-          } else if (catFile[0] === 'c') {
-            setCommand('cat cui-portfolio.txt');
-          } else if (catFile[0] === 'd' && catFile[1] === 'e') {
-            setCommand('cat deadline-timer.txt');
-          } else if (catFile[0] === 'd' && catFile[1] === 'o') {
-            setCommand('cat download-pixiv-images.txt');
-          }
-        } else if (currentDir === CONTACTS_PATH) {
-          if (catFile[0] === 't') {
-            setCommand('cat twitter.txt');
-          } else if (catFile[0] === 'g' && catFile[1] === 'i') {
-            setCommand('cat github.txt');
-          } else if (catFile[0] === 'g' && catFile[1] === 'm') {
-            setCommand('cat gmail.txt');
-          } else if (catFile[0] === 'f') {
-            setCommand('cat facebook.txt');
-          } else if (catFile[0] === 'i') {
-            setCommand('cat instagram.txt');
-          } else if (catFile[0] === 'q') {
-            setCommand('cat qiita.txt');
-          }
-        } else if (currentDir === WHITE_PATH) {
-          if (catFile[0] === 'r' && catFile[1] === 'e' && catFile[2] === 'q') {
-            setCommand('cat requirements.txt');
-          } else if (
-            catFile[0] === 'r' &&
-            catFile[1] === 'e' &&
-            catFile[2] === 'a'
-          ) {
-            setCommand('cat README.md');
-          } else if (
-            catFile[0] === 'R' &&
-            catFile[1] === 'e' &&
-            catFile[2] === 'a'
-          ) {
-            setCommand('cat README.md');
-          } else if (
-            catFile[0] === 'R' &&
-            catFile[1] === 'E' &&
-            catFile[2] === 'A'
-          ) {
-            setCommand('cat README.md');
-          } else if (catFile[0] === 'm') {
-            setCommand('cat main.py0');
-          } else if (catFile[0] === 'p') {
-            setCommand('cat pyproject.toml');
-          }
-        }
-      }
+        let catFile = command.replace('cat ', '').replace(/\/$/, '');
 
-      // white補完
-      else if (command.startsWith('white')) {
-        let whiteFile = command.replace('white', '').replace(/\/$/, '').trim();
-        if (currentDir === WHITE_PATH) {
-          if (
-            whiteFile[0] === 'r' &&
-            whiteFile[1] === 'e' &&
-            whiteFile[2] === 'q'
-          ) {
-            setCommand('white requirements.txt');
-          } else if (
-            whiteFile[0] === 'r' &&
-            whiteFile[1] === 'e' &&
-            whiteFile[2] === 'a'
-          ) {
-            setCommand('white README.md');
-          } else if (
-            whiteFile[0] === 'R' &&
-            whiteFile[1] === 'e' &&
-            whiteFile[2] === 'a'
-          ) {
-            setCommand('white README.md');
-          } else if (
-            whiteFile[0] === 'R' &&
-            whiteFile[1] === 'E' &&
-            whiteFile[2] === 'A'
-          ) {
-            setCommand('white README.md');
-          } else if (whiteFile[0] === 'm') {
-            setCommand('white main.py0');
-          } else if (whiteFile[0] === 'p') {
-            setCommand('white pyproject.toml');
+        // pathが入力されていないときに補完しない
+        if (catFile !== '') {
+          // GENSHI_PATHの時, LS_GENSHI_ITEMから'.'を含んで前方一致のものを返す
+          if (currentDir === GENSHI_PATH) {
+            cat_completion(catFile, LS_GENSHI_ITEM);
+          }
+
+          // PRODUCT_PATHの時, LS_PRODUCTS_ITEMから'.'を含んで前方一致のものを返す
+          else if (currentDir === PRODUCTS_PATH) {
+            cat_completion(catFile, LS_PRODUCTS_ITEM);
+          }
+
+          // CONTACTS_PATHの時, LS_CONTACTS_ITEMから'.'を含んで前方一致のものを返す
+          else if (currentDir === CONTACTS_PATH) {
+            cat_completion(catFile, LS_CONTACTS_ITEM);
+          }
+
+          // WHITE_PATHの時, LS_WHITE_ITEMから'.'を含んで前方一致のものを返す
+          else if (currentDir === WHITE_PATH) {
+            cat_completion(catFile, LS_WHITE_ITEM);
           }
         }
       }
@@ -221,8 +159,28 @@ const Terminal: FC = () => {
     }
   };
 
-  const scrollBottom = () => {
+  const scrollBottom = (): void => {
     document.getElementById('bottom').scrollIntoView({ behavior: 'auto' });
+  };
+
+  const cd_completion = (path: string, lsItems: string[]): void => {
+    let completion_detail = lsItems
+      .filter((item) => !item.includes('.'))
+      .find((item) => !item.indexOf(path));
+
+    if (completion_detail !== undefined) {
+      setCommand('cd ' + completion_detail + '/');
+    }
+  };
+
+  const cat_completion = (file: string, catItems: string[]): void => {
+    let completion_detail = catItems
+      .filter((item) => item.includes('.'))
+      .find((item) => !item.indexOf(file));
+
+    if (completion_detail !== undefined) {
+      setCommand('cat ' + completion_detail);
+    }
   };
 
   return (
