@@ -73,78 +73,46 @@ const Terminal: FC = () => {
 
       // cd補完
       if (command.startsWith('cd')) {
-        let path = command.replace('cd', '').replace(/\/$/, '').trim();
+        let path = command.replace('cd ', '').replace(/\/$/, '');
+
         // pathが入力されていないときに補完しない
         if (path !== '') {
           // GENSHI_PATHの時, LS_GENSHI_ITEMから'.'を含まず前方一致のものを返す
           if (currentDir === GENSHI_PATH) {
-            let completion_detail = LS_GENSHI_ITEM.filter(
-              (item) => !item.includes('.')
-            ).find((item) => !item.indexOf(path));
-            if (completion_detail !== undefined) {
-              setCommand('cd ' + completion_detail + '/');
-            }
+            cd_completion(path, LS_GENSHI_ITEM);
           }
+
           // HOME_PATHの時, LS_HOME_ITEMから'.'を含まず前方一致のものを返す
           else if (currentDir === HOME_PATH) {
-            let completion_detail = LS_HOME_ITEM.filter(
-              (item) => !item.includes('.')
-            ).find((item) => !item.indexOf(path));
-
-            if (completion_detail !== undefined) {
-              setCommand('cd ' + completion_detail + '/');
-            }
+            cd_completion(path, LS_HOME_ITEM);
           }
         }
       }
 
       // cat補完
       else if (command.startsWith('cat')) {
-        let catFile = command.replace('cat', '').replace(/\/$/, '').trim();
+        let catFile = command.replace('cat ', '').replace(/\/$/, '');
+
         // pathが入力されていないときに補完しない
         if (catFile !== '') {
           // GENSHI_PATHの時, LS_GENSHI_ITEMから'.'を含んで前方一致のものを返す
           if (currentDir === GENSHI_PATH) {
-            let completion_detail = LS_GENSHI_ITEM.filter((item) =>
-              item.includes('.')
-            ).find((item) => !item.indexOf(catFile));
-
-            if (completion_detail !== undefined) {
-              setCommand('cat ' + completion_detail);
-            }
+            cat_completion(catFile, LS_GENSHI_ITEM);
           }
 
           // PRODUCT_PATHの時, LS_PRODUCTS_ITEMから'.'を含んで前方一致のものを返す
           else if (currentDir === PRODUCTS_PATH) {
-            let completion_detail = LS_PRODUCTS_ITEM.filter((item) =>
-              item.includes('.')
-            ).find((item) => !item.indexOf(catFile));
-
-            if (completion_detail !== undefined) {
-              setCommand('cat ' + completion_detail);
-            }
+            cat_completion(catFile, LS_PRODUCTS_ITEM);
           }
 
           // CONTACTS_PATHの時, LS_CONTACTS_ITEMから'.'を含んで前方一致のものを返す
           else if (currentDir === CONTACTS_PATH) {
-            let completion_detail = LS_CONTACTS_ITEM.filter((item) =>
-              item.includes('.')
-            ).find((item) => !item.indexOf(catFile));
-
-            if (completion_detail !== undefined) {
-              setCommand('cat ' + completion_detail);
-            }
+            cat_completion(catFile, LS_CONTACTS_ITEM);
           }
 
           // WHITE_PATHの時, LS_WHITE_ITEMから'.'を含んで前方一致のものを返す
           else if (currentDir === WHITE_PATH) {
-            let completion_detail = LS_WHITE_ITEM.filter((item) =>
-              item.includes('.')
-            ).find((item) => !item.indexOf(catFile));
-
-            if (completion_detail !== undefined) {
-              setCommand('cat ' + completion_detail);
-            }
+            cat_completion(catFile, LS_WHITE_ITEM);
           }
         }
       }
@@ -192,6 +160,26 @@ const Terminal: FC = () => {
 
   const scrollBottom = () => {
     document.getElementById('bottom').scrollIntoView({ behavior: 'auto' });
+  };
+
+  const cd_completion = (path, lsItems) => {
+    let completion_detail = lsItems
+      .filter((item) => !item.includes('.'))
+      .find((item) => !item.indexOf(path));
+
+    if (completion_detail !== undefined) {
+      setCommand('cd ' + completion_detail + '/');
+    }
+  };
+
+  const cat_completion = (file, catItems) => {
+    let completion_detail = catItems
+      .filter((item) => item.includes('.'))
+      .find((item) => !item.indexOf(file));
+
+    if (completion_detail !== undefined) {
+      setCommand('cat ' + completion_detail);
+    }
   };
 
   return (
