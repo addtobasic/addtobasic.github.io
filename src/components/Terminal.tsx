@@ -13,6 +13,7 @@ import {
   LS_CONTACTS_ITEM,
   LS_WHITE_ITEM,
 } from '../util';
+import path from 'path';
 
 const TERMINAL_MENU_INDEX = [
   'File',
@@ -30,7 +31,7 @@ const Terminal: FC = () => {
   const [command, setCommand] = useState('');
   const [replies, setReplies] = useState([]);
   const [logs, setLogs] = useState([]);
-  const [commandHistory, setCommandHistory] = useState([]);
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [currentDir, setCurrentDir] = useState(GENSHI_PATH);
   const [isFormatted, setIsFormatted] = useState(false);
 
@@ -158,11 +159,11 @@ const Terminal: FC = () => {
     }
   };
 
-  const scrollBottom = () => {
+  const scrollBottom = (): void => {
     document.getElementById('bottom').scrollIntoView({ behavior: 'auto' });
   };
 
-  const cd_completion = (path, lsItems) => {
+  const cd_completion = (path: string, lsItems: string[]): void => {
     let completion_detail = lsItems
       .filter((item) => !item.includes('.'))
       .find((item) => !item.indexOf(path));
@@ -172,7 +173,7 @@ const Terminal: FC = () => {
     }
   };
 
-  const cat_completion = (file, catItems) => {
+  const cat_completion = (file: string, catItems: string[]): void => {
     let completion_detail = catItems
       .filter((item) => item.includes('.'))
       .find((item) => !item.indexOf(file));
