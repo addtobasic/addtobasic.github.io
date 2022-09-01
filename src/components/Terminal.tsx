@@ -9,6 +9,9 @@ import {
   WHITE_PATH,
   LS_HOME_ITEM,
   LS_GENSHI_ITEM,
+  LS_PRODUCTS_ITEM,
+  LS_CONTACTS_ITEM,
+  LS_WHITE_ITEM,
 } from '../util';
 
 const TERMINAL_MENU_INDEX = [
@@ -78,14 +81,19 @@ const Terminal: FC = () => {
             let completion_detail = LS_GENSHI_ITEM.filter(
               (item) => !item.includes('.')
             ).find((item) => !item.indexOf(path));
-            setCommand('cd ' + completion_detail + '/');
+            if (completion_detail !== undefined) {
+              setCommand('cd ' + completion_detail + '/');
+            }
           }
           // HOME_PATHの時, LS_HOME_ITEMから'.'を含まず前方一致のものを返す
           else if (currentDir === HOME_PATH) {
             let completion_detail = LS_HOME_ITEM.filter(
               (item) => !item.includes('.')
             ).find((item) => !item.indexOf(path));
-            setCommand('cd ' + completion_detail + '/');
+
+            if (completion_detail !== undefined) {
+              setCommand('cd ' + completion_detail + '/');
+            }
           }
         }
       }
@@ -93,95 +101,50 @@ const Terminal: FC = () => {
       // cat補完
       else if (command.startsWith('cat')) {
         let catFile = command.replace('cat', '').replace(/\/$/, '').trim();
-        if (currentDir === GENSHI_PATH) {
-          if (catFile[0] === 'p') {
-            setCommand('cat profile.txt');
-          }
-        } else if (currentDir === PRODUCTS_PATH) {
-          if (catFile[0] === 'p') {
-            setCommand('cat portfolio.txt');
-          } else if (catFile[0] === 'c') {
-            setCommand('cat cui-portfolio.txt');
-          } else if (catFile[0] === 'd' && catFile[1] === 'e') {
-            setCommand('cat deadline-timer.txt');
-          } else if (catFile[0] === 'd' && catFile[1] === 'o') {
-            setCommand('cat download-pixiv-images.txt');
-          }
-        } else if (currentDir === CONTACTS_PATH) {
-          if (catFile[0] === 't') {
-            setCommand('cat twitter.txt');
-          } else if (catFile[0] === 'g' && catFile[1] === 'i') {
-            setCommand('cat github.txt');
-          } else if (catFile[0] === 'g' && catFile[1] === 'm') {
-            setCommand('cat gmail.txt');
-          } else if (catFile[0] === 'f') {
-            setCommand('cat facebook.txt');
-          } else if (catFile[0] === 'i') {
-            setCommand('cat instagram.txt');
-          } else if (catFile[0] === 'q') {
-            setCommand('cat qiita.txt');
-          }
-        } else if (currentDir === WHITE_PATH) {
-          if (catFile[0] === 'r' && catFile[1] === 'e' && catFile[2] === 'q') {
-            setCommand('cat requirements.txt');
-          } else if (
-            catFile[0] === 'r' &&
-            catFile[1] === 'e' &&
-            catFile[2] === 'a'
-          ) {
-            setCommand('cat README.md');
-          } else if (
-            catFile[0] === 'R' &&
-            catFile[1] === 'e' &&
-            catFile[2] === 'a'
-          ) {
-            setCommand('cat README.md');
-          } else if (
-            catFile[0] === 'R' &&
-            catFile[1] === 'E' &&
-            catFile[2] === 'A'
-          ) {
-            setCommand('cat README.md');
-          } else if (catFile[0] === 'm') {
-            setCommand('cat main.py0');
-          } else if (catFile[0] === 'p') {
-            setCommand('cat pyproject.toml');
-          }
-        }
-      }
+        // pathが入力されていないときに補完しない
+        if (catFile !== '') {
+          // GENSHI_PATHの時, LS_GENSHI_ITEMから'.'を含んで前方一致のものを返す
+          if (currentDir === GENSHI_PATH) {
+            let completion_detail = LS_GENSHI_ITEM.filter((item) =>
+              item.includes('.')
+            ).find((item) => !item.indexOf(catFile));
 
-      // white補完
-      else if (command.startsWith('white')) {
-        let whiteFile = command.replace('white', '').replace(/\/$/, '').trim();
-        if (currentDir === WHITE_PATH) {
-          if (
-            whiteFile[0] === 'r' &&
-            whiteFile[1] === 'e' &&
-            whiteFile[2] === 'q'
-          ) {
-            setCommand('white requirements.txt');
-          } else if (
-            whiteFile[0] === 'r' &&
-            whiteFile[1] === 'e' &&
-            whiteFile[2] === 'a'
-          ) {
-            setCommand('white README.md');
-          } else if (
-            whiteFile[0] === 'R' &&
-            whiteFile[1] === 'e' &&
-            whiteFile[2] === 'a'
-          ) {
-            setCommand('white README.md');
-          } else if (
-            whiteFile[0] === 'R' &&
-            whiteFile[1] === 'E' &&
-            whiteFile[2] === 'A'
-          ) {
-            setCommand('white README.md');
-          } else if (whiteFile[0] === 'm') {
-            setCommand('white main.py0');
-          } else if (whiteFile[0] === 'p') {
-            setCommand('white pyproject.toml');
+            if (completion_detail !== undefined) {
+              setCommand('cat ' + completion_detail);
+            }
+          }
+
+          // PRODUCT_PATHの時, LS_PRODUCTS_ITEMから'.'を含んで前方一致のものを返す
+          else if (currentDir === PRODUCTS_PATH) {
+            let completion_detail = LS_PRODUCTS_ITEM.filter((item) =>
+              item.includes('.')
+            ).find((item) => !item.indexOf(catFile));
+
+            if (completion_detail !== undefined) {
+              setCommand('cat ' + completion_detail);
+            }
+          }
+
+          // CONTACTS_PATHの時, LS_CONTACTS_ITEMから'.'を含んで前方一致のものを返す
+          else if (currentDir === CONTACTS_PATH) {
+            let completion_detail = LS_CONTACTS_ITEM.filter((item) =>
+              item.includes('.')
+            ).find((item) => !item.indexOf(catFile));
+
+            if (completion_detail !== undefined) {
+              setCommand('cat ' + completion_detail);
+            }
+          }
+
+          // WHITE_PATHの時, LS_WHITE_ITEMから'.'を含んで前方一致のものを返す
+          else if (currentDir === WHITE_PATH) {
+            let completion_detail = LS_WHITE_ITEM.filter((item) =>
+              item.includes('.')
+            ).find((item) => !item.indexOf(catFile));
+
+            if (completion_detail !== undefined) {
+              setCommand('cat ' + completion_detail);
+            }
           }
         }
       }
