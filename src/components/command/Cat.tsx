@@ -4,6 +4,7 @@ import UbuntuText from '../UbuntuText';
 import {
   CAT_FILE_CONTENTS,
   WHITE_PATH,
+  SLIDE_PATH,
   README_FILE_CONTENT,
   REQUIREMENTS_FILE_CONTENT,
   MAIN_FILE_CONTENT,
@@ -30,6 +31,11 @@ const Cat: FC<Props> = ({ dirItem, catFile, currentDir, isFormatted }) => {
     } else if (catFile === 'pyproject.toml') {
       return PYPROJECT_FILE_CONTENT;
     }
+  }
+
+  // catでslide関連のファイルの場合エラーを返す
+  else if (dirItem.includes(catFile) && currentDir === SLIDE_PATH) {
+    return <UbuntuText>bash: cat: {catFile}: Is a slide file</UbuntuText>;
   }
 
   // white関連のファイルでないならdirItemに含まれるCAT_FILE_CONTENTSの値を表示
