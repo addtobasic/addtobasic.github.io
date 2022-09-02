@@ -8,6 +8,7 @@ import Cat from './command/Cat';
 import Pwd from './command/Pwd';
 import DateNow from './command/DateNow';
 import White from './command/White';
+import Slide from './command/Slide';
 import UbuntuText from '../components/UbuntuText';
 import {
   HOME_PATH,
@@ -150,6 +151,17 @@ const handler = (
     let whiteFile = command.replace('white ', '').replace(/\/$/, '');
 
     return <White whiteFile={whiteFile} setIsFormatted={setIsFormatted} />;
+  }
+
+  // slide
+  else if (command === 'slide' && currentDir === SLIDE_PATH) {
+    return <UbuntuText>No Path provided. Nothing to do 😴</UbuntuText>;
+  } else if (command.startsWith('slide ') && currentDir === SLIDE_PATH) {
+    let fileName = command.replace('slide ', '').replace(/\/$/, '');
+
+    return (
+      <Slide dirItem={dirItem} fileName={fileName} currentDir={currentDir} />
+    );
   }
 
   // pip
