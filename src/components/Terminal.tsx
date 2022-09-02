@@ -7,11 +7,13 @@ import {
   PRODUCTS_PATH,
   CONTACTS_PATH,
   WHITE_PATH,
+  SLIDE_PATH,
   LS_HOME_ITEM,
   LS_GENSHI_ITEM,
   LS_PRODUCTS_ITEM,
   LS_CONTACTS_ITEM,
   LS_WHITE_ITEM,
+  LS_SLIDE_ITEM,
 } from '../util';
 import path from 'path';
 
@@ -114,6 +116,11 @@ const Terminal: FC = () => {
           // WHITE_PATHの時, LS_WHITE_ITEMから'.'を含んで前方一致のものを返す
           else if (currentDir === WHITE_PATH) {
             cat_completion(catFile, LS_WHITE_ITEM);
+          }
+
+          // SLIDE_PATHの時, LS_SLIDE_ITEMから'.'を含んで前方一致のものを返す
+          else if (currentDir === SLIDE_PATH) {
+            cat_completion(catFile, LS_SLIDE_ITEM);
           }
         }
       }
