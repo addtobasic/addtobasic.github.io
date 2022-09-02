@@ -4,6 +4,7 @@ export const GENSHI_PATH: string = '/home/genshi';
 export const PRODUCTS_PATH: string = '/home/genshi/products';
 export const CONTACTS_PATH: string = '/home/genshi/contacts';
 export const WHITE_PATH: string = '/home/genshi/white';
+export const SLIDE_PATH: string = '/home/genshi/slide';
 
 export const LS_HOME_ITEM: string[] = ['genshi'];
 export const LS_GENSHI_ITEM: string[] = [
@@ -11,6 +12,7 @@ export const LS_GENSHI_ITEM: string[] = [
   'products',
   'contacts',
   'white',
+  'slide',
 ];
 export const LS_PRODUCTS_ITEM: string[] = [
   'portfolio.txt',
@@ -32,6 +34,7 @@ export const LS_WHITE_ITEM: string[] = [
   'pyproject.toml',
   'requirements.txt',
 ];
+export const LS_SLIDE_ITEM: string[] = ['geeksai.pptx'];
 
 export const CAT_FILE_CONTENTS = {
   'profile.txt': {

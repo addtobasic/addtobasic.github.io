@@ -15,11 +15,13 @@ import {
   PRODUCTS_PATH,
   CONTACTS_PATH,
   WHITE_PATH,
+  SLIDE_PATH,
   LS_HOME_ITEM,
   LS_GENSHI_ITEM,
   LS_PRODUCTS_ITEM,
   LS_CONTACTS_ITEM,
   LS_WHITE_ITEM,
+  LS_SLIDE_ITEM,
   getDateStr,
 } from '../util';
 
@@ -51,6 +53,8 @@ const handler = (
       dirItem = LS_CONTACTS_ITEM;
     } else if (currentDir === WHITE_PATH) {
       dirItem = LS_WHITE_ITEM;
+    } else if (currentDir === SLIDE_PATH) {
+      dirItem = LS_SLIDE_ITEM;
     }
 
     return <Ls dirItem={dirItem} />;
@@ -74,6 +78,9 @@ const handler = (
     } else if (currentDir === GENSHI_PATH && path === 'white') {
       dirItem = LS_WHITE_ITEM;
       setCurrentDir(GENSHI_PATH + '/' + path);
+    } else if (currentDir === GENSHI_PATH && path === 'slide') {
+      dirItem = LS_SLIDE_ITEM;
+      setCurrentDir(GENSHI_PATH + '/' + path);
     } else if (currentDir === HOME_PATH && path === 'genshi') {
       dirItem = LS_GENSHI_ITEM;
       setCurrentDir(GENSHI_PATH);
@@ -85,6 +92,8 @@ const handler = (
       } else if (currentDir === CONTACTS_PATH) {
         setCurrentDir(GENSHI_PATH);
       } else if (currentDir === WHITE_PATH) {
+        setCurrentDir(GENSHI_PATH);
+      } else if (currentDir === SLIDE_PATH) {
         setCurrentDir(GENSHI_PATH);
       }
     } else {
