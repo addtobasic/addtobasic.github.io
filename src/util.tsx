@@ -4,6 +4,7 @@ export const GENSHI_PATH: string = '/home/genshi';
 export const PRODUCTS_PATH: string = '/home/genshi/products';
 export const CONTACTS_PATH: string = '/home/genshi/contacts';
 export const WHITE_PATH: string = '/home/genshi/white';
+export const SLIDE_PATH: string = '/home/genshi/slide';
 
 export const LS_HOME_ITEM: string[] = ['genshi'];
 export const LS_GENSHI_ITEM: string[] = [
@@ -11,6 +12,7 @@ export const LS_GENSHI_ITEM: string[] = [
   'products',
   'contacts',
   'white',
+  'slide',
 ];
 export const LS_PRODUCTS_ITEM: string[] = [
   'portfolio.txt',
@@ -32,6 +34,7 @@ export const LS_WHITE_ITEM: string[] = [
   'pyproject.toml',
   'requirements.txt',
 ];
+export const LS_SLIDE_ITEM: string[] = ['geeksai.pptx'];
 
 export const CAT_FILE_CONTENTS = {
   'profile.txt': {
@@ -175,6 +178,11 @@ export const PYPROJECT_FILE_CONTENT = (
     <p>&#039;&#039;&#039;</p>
   </UbuntuText>
 );
+
+export const SLIDE_FILE_CONTENTS = {
+  'geeksai.pptx':
+    'https://docs.google.com/presentation/d/e/2PACX-1vSMeBePa36_RPXoBuCWFe9svCL4nmXmkrag5VlQF78ULI0ZZ9Kefy0BN4VF_Ja9Kn1QOBy2oHeHIJzm/embed?start=false&loop=false&delayms=3000',
+};
 
 export const getDateStr = () => {
   const now = new Date();

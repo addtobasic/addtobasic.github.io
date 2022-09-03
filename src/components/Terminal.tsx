@@ -7,11 +7,13 @@ import {
   PRODUCTS_PATH,
   CONTACTS_PATH,
   WHITE_PATH,
+  SLIDE_PATH,
   LS_HOME_ITEM,
   LS_GENSHI_ITEM,
   LS_PRODUCTS_ITEM,
   LS_CONTACTS_ITEM,
   LS_WHITE_ITEM,
+  LS_SLIDE_ITEM,
 } from '../util';
 import path from 'path';
 
@@ -115,7 +117,31 @@ const Terminal: FC = () => {
           else if (currentDir === WHITE_PATH) {
             cat_completion(catFile, LS_WHITE_ITEM);
           }
+
+          // SLIDE_PATHの時, LS_SLIDE_ITEMから'.'を含んで前方一致のものを返す
+          else if (currentDir === SLIDE_PATH) {
+            cat_completion(catFile, LS_SLIDE_ITEM);
+          }
         }
+      }
+
+      // white補完
+      else if (command.startsWith('white')) {
+        let completion_detail = command
+          .replace('white ', '')
+          .replace(/\/$/, '')
+          .trim();
+        if (currentDir === WHITE_PATH) {
+          if (completion_detail[0] === 'm') {
+            setCommand('white main.py0');
+          }
+        }
+      }
+
+      // slide補完
+      else if (command.startsWith('slide')) {
+        let slideFile = command.replace('slide ', '').replace(/\/$/, '');
+        slide_completion(slideFile, LS_SLIDE_ITEM);
       }
 
       // pip補完
@@ -180,6 +206,16 @@ const Terminal: FC = () => {
 
     if (completion_detail !== undefined) {
       setCommand('cat ' + completion_detail);
+    }
+  };
+
+  const slide_completion = (file: string, slideItems: string[]): void => {
+    let completion_detail = slideItems
+      .filter((item) => item.includes('.'))
+      .find((item) => !item.indexOf(file));
+
+    if (completion_detail !== undefined) {
+      setCommand('slide ' + completion_detail);
     }
   };
 
