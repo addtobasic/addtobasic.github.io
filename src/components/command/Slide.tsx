@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import { SLIDE_PATH } from '../../util';
+import NoFileOrDir from './NoFileOrDir';
+import { SLIDE_PATH, SLIDE_FILE_CONTENTS } from '../../util';
 
 type Props = {
   dirItem: string[];
@@ -12,11 +13,13 @@ const Slide: FC<Props> = ({ dirItem, fileName, currentDir }) => {
     return (
       <iframe
         className='w-full h-[569px]'
-        src='https://docs.google.com/presentation/d/e/2PACX-1vSMeBePa36_RPXoBuCWFe9svCL4nmXmkrag5VlQF78ULI0ZZ9Kefy0BN4VF_Ja9Kn1QOBy2oHeHIJzm/embed?start=false&loop=false&delayms=3000'
+        src={SLIDE_FILE_CONTENTS[fileName]}
         frameBorder='0'
         allow='fullscreen'
       ></iframe>
     );
+  } else {
+    return <NoFileOrDir command={'slide'} fileOrDir={fileName} />;
   }
 };
 

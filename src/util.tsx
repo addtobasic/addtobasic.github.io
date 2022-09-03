@@ -179,6 +179,11 @@ export const PYPROJECT_FILE_CONTENT = (
   </UbuntuText>
 );
 
+export const SLIDE_FILE_CONTENTS = {
+  'geeksai.pptx':
+    'https://docs.google.com/presentation/d/e/2PACX-1vSMeBePa36_RPXoBuCWFe9svCL4nmXmkrag5VlQF78ULI0ZZ9Kefy0BN4VF_Ja9Kn1QOBy2oHeHIJzm/embed?start=false&loop=false&delayms=3000',
+};
+
 export const getDateStr = () => {
   const now = new Date();
 
