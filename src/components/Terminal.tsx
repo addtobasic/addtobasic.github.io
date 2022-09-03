@@ -125,6 +125,25 @@ const Terminal: FC = () => {
         }
       }
 
+      // white補完
+      else if (command.startsWith('white')) {
+        let completion_detail = command
+          .replace('white ', '')
+          .replace(/\/$/, '')
+          .trim();
+        if (currentDir === WHITE_PATH) {
+          if (completion_detail[0] === 'm') {
+            setCommand('white main.py0');
+          }
+        }
+      }
+
+      // slide補完
+      else if (command.startsWith('slide')) {
+        let slideFile = command.replace('slide ', '').replace(/\/$/, '');
+        slide_completion(slideFile, LS_SLIDE_ITEM);
+      }
+
       // pip補完
       else if (command.startsWith('pip')) {
         let pipCommand = command
@@ -187,6 +206,16 @@ const Terminal: FC = () => {
 
     if (completion_detail !== undefined) {
       setCommand('cat ' + completion_detail);
+    }
+  };
+
+  const slide_completion = (file: string, slideItems: string[]): void => {
+    let completion_detail = slideItems
+      .filter((item) => item.includes('.'))
+      .find((item) => !item.indexOf(file));
+
+    if (completion_detail !== undefined) {
+      setCommand('slide ' + completion_detail);
     }
   };
 
