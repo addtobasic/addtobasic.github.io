@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import NoFileOrDir from './error/NoFileOrDir';
 import IsDir from './error/IsDir';
+import IsSlide from './error/IsSlide';
 import UbuntuText from '../UbuntuText';
 import {
   CAT_FILE_CONTENTS,
@@ -41,7 +42,7 @@ const Cat: FC<Props> = ({ dirItem, fileName, currentDir, isFormatted }) => {
 
   // catでslide関連のファイルの場合エラーを返す
   else if (dirItem.includes(fileName) && currentDir === SLIDE_PATH) {
-    return <UbuntuText>bash: cat: {fileName}: Is a slide file</UbuntuText>;
+    return <IsSlide fileName={fileName} />;
   }
 
   // white関連のファイルでないならdirItemに含まれるCAT_FILE_CONTENTSの値を表示
