@@ -15,7 +15,6 @@ import {
   LS_WHITE_ITEM,
   LS_SLIDE_ITEM,
 } from '../util';
-import path from 'path';
 
 const TERMINAL_MENU_INDEX = [
   'File',
@@ -76,51 +75,53 @@ const Terminal: FC = () => {
 
       // cd補完
       if (command.startsWith('cd')) {
-        let path = command.replace('cd ', '').replace(/\/$/, '');
+        // 入力された内容からdirNameを抽出
+        let dirName = command.replace('cd ', '').replace(/\/$/, '');
 
         // pathが入力されていないときに補完しない
-        if (path !== '') {
-          // GENSHI_PATHの時, LS_GENSHI_ITEMから'.'を含まず前方一致のものを返す
+        if (dirName !== '') {
+          // GENSHI_PATHの時, LS_GENSHI_ITEMから'.'を含まず前方一致のものを補完
           if (currentDir === GENSHI_PATH) {
-            cd_completion(path, LS_GENSHI_ITEM);
+            cd_completion(dirName, LS_GENSHI_ITEM);
           }
 
-          // HOME_PATHの時, LS_HOME_ITEMから'.'を含まず前方一致のものを返す
+          // HOME_PATHの時, LS_HOME_ITEMから'.'を含まず前方一致のものを補完
           else if (currentDir === HOME_PATH) {
-            cd_completion(path, LS_HOME_ITEM);
+            cd_completion(dirName, LS_HOME_ITEM);
           }
         }
       }
 
       // cat補完
       else if (command.startsWith('cat')) {
-        let catFile = command.replace('cat ', '').replace(/\/$/, '');
+        // 入力された内容からfileNameを抽出
+        let fileName = command.replace('cat ', '').replace(/\/$/, '');
 
         // pathが入力されていないときに補完しない
-        if (catFile !== '') {
-          // GENSHI_PATHの時, LS_GENSHI_ITEMから'.'を含んで前方一致のものを返す
+        if (fileName !== '') {
+          // GENSHI_PATHの時, LS_GENSHI_ITEMから'.'を含んで前方一致のものを補完
           if (currentDir === GENSHI_PATH) {
-            cat_completion(catFile, LS_GENSHI_ITEM);
+            cat_completion(fileName, LS_GENSHI_ITEM);
           }
 
-          // PRODUCT_PATHの時, LS_PRODUCTS_ITEMから'.'を含んで前方一致のものを返す
+          // PRODUCT_PATHの時, LS_PRODUCTS_ITEMから'.'を含んで前方一致のものを補完
           else if (currentDir === PRODUCTS_PATH) {
-            cat_completion(catFile, LS_PRODUCTS_ITEM);
+            cat_completion(fileName, LS_PRODUCTS_ITEM);
           }
 
-          // CONTACTS_PATHの時, LS_CONTACTS_ITEMから'.'を含んで前方一致のものを返す
+          // CONTACTS_PATHの時, LS_CONTACTS_ITEMから'.'を含んで前方一致のものを補完
           else if (currentDir === CONTACTS_PATH) {
-            cat_completion(catFile, LS_CONTACTS_ITEM);
+            cat_completion(fileName, LS_CONTACTS_ITEM);
           }
 
-          // WHITE_PATHの時, LS_WHITE_ITEMから'.'を含んで前方一致のものを返す
+          // WHITE_PATHの時, LS_WHITE_ITEMから'.'を含んで前方一致のものを補完
           else if (currentDir === WHITE_PATH) {
-            cat_completion(catFile, LS_WHITE_ITEM);
+            cat_completion(fileName, LS_WHITE_ITEM);
           }
 
-          // SLIDE_PATHの時, LS_SLIDE_ITEMから'.'を含んで前方一致のものを返す
+          // SLIDE_PATHの時, LS_SLIDE_ITEMから'.'を含んで前方一致のものを補完
           else if (currentDir === SLIDE_PATH) {
-            cat_completion(catFile, LS_SLIDE_ITEM);
+            cat_completion(fileName, LS_SLIDE_ITEM);
           }
         }
       }
@@ -190,6 +191,7 @@ const Terminal: FC = () => {
   };
 
   const cd_completion = (path: string, lsItems: string[]): void => {
+    // lsItemsのフォルダから前方一致のものを抽出
     let completion_detail = lsItems
       .filter((item) => !item.includes('.'))
       .find((item) => !item.indexOf(path));
@@ -200,6 +202,7 @@ const Terminal: FC = () => {
   };
 
   const cat_completion = (file: string, catItems: string[]): void => {
+    // catItemsのファイルから前方一致のものを抽出
     let completion_detail = catItems
       .filter((item) => item.includes('.'))
       .find((item) => !item.indexOf(file));
@@ -210,6 +213,7 @@ const Terminal: FC = () => {
   };
 
   const slide_completion = (file: string, slideItems: string[]): void => {
+    // slideItemsのファイルから前方一致のものを抽出
     let completion_detail = slideItems
       .filter((item) => item.includes('.'))
       .find((item) => !item.indexOf(file));

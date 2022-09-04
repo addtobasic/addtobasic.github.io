@@ -14,49 +14,49 @@ import {
 
 type Props = {
   dirItem: string[];
-  catFile: string;
+  fileName: string;
   currentDir: string;
   isFormatted: boolean;
 };
 
-const Cat: FC<Props> = ({ dirItem, catFile, currentDir, isFormatted }) => {
+const Cat: FC<Props> = ({ dirItem, fileName, currentDir, isFormatted }) => {
   // catでwhite関連のファイルの場合タグで囲んだファイルの中身を返す
-  if (dirItem.includes(catFile) && currentDir === WHITE_PATH) {
-    if (catFile === 'README.md') {
+  if (dirItem.includes(fileName) && currentDir === WHITE_PATH) {
+    if (fileName === 'README.md') {
       return README_FILE_CONTENT;
-    } else if (catFile === 'requirements.txt') {
+    } else if (fileName === 'requirements.txt') {
       return REQUIREMENTS_FILE_CONTENT;
-    } else if (catFile === 'main.py0') {
+    } else if (fileName === 'main.py0') {
       return isFormatted ? MAIN_FILE_CONTENT_SEMI : MAIN_FILE_CONTENT;
-    } else if (catFile === 'pyproject.toml') {
+    } else if (fileName === 'pyproject.toml') {
       return PYPROJECT_FILE_CONTENT;
     }
   }
 
   // catでslide関連のファイルの場合エラーを返す
-  else if (dirItem.includes(catFile) && currentDir === SLIDE_PATH) {
-    return <UbuntuText>bash: cat: {catFile}: Is a slide file</UbuntuText>;
+  else if (dirItem.includes(fileName) && currentDir === SLIDE_PATH) {
+    return <UbuntuText>bash: cat: {fileName}: Is a slide file</UbuntuText>;
   }
 
   // white関連のファイルでないならdirItemに含まれるCAT_FILE_CONTENTSの値を表示
-  else if (dirItem.includes(catFile)) {
+  else if (dirItem.includes(fileName)) {
     // urlがないならhover時にunderlineをつけない
-    return CAT_FILE_CONTENTS[catFile].url === undefined ? (
-      <UbuntuText>{CAT_FILE_CONTENTS[catFile].content}</UbuntuText>
+    return CAT_FILE_CONTENTS[fileName].url === undefined ? (
+      <UbuntuText>{CAT_FILE_CONTENTS[fileName].content}</UbuntuText>
     ) : (
       <p className='font-ubuntu_terminal text-white'>
         <a
           className='hover:underline'
-          href={CAT_FILE_CONTENTS[catFile].url}
+          href={CAT_FILE_CONTENTS[fileName].url}
           target='_blank'
           rel='noreferrer'
         >
-          {CAT_FILE_CONTENTS[catFile].content}
+          {CAT_FILE_CONTENTS[fileName].content}
         </a>
       </p>
     );
   } else {
-    return <NoFileOrDir command={'cat'} fileOrDir={catFile} />;
+    return <NoFileOrDir command={'cat'} fileOrDir={fileName} />;
   }
 };
 

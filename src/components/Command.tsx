@@ -110,12 +110,13 @@ const handler = (
   else if (command === 'cat') {
     // なにも実行しない
   } else if (command.startsWith('cat ')) {
-    let catFile = command.replace('cat ', '').replace(/\/$/, '');
+    // 入力された内容からfileNameを抽出
+    let fileName = command.replace('cat ', '').replace(/\/$/, '');
 
     return (
       <Cat
         dirItem={dirItem}
-        catFile={catFile}
+        fileName={fileName}
         currentDir={currentDir}
         isFormatted={isFormatted}
       />
