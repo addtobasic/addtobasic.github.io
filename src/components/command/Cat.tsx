@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import NoFileOrDir from './error/NoFileOrDir';
+import IsDir from './error/IsDir';
 import UbuntuText from '../UbuntuText';
 import {
   CAT_FILE_CONTENTS,
@@ -22,7 +23,7 @@ type Props = {
 const Cat: FC<Props> = ({ dirItem, fileName, currentDir, isFormatted }) => {
   // フォルダにcatを実行した場合にエラーを返す
   if (!fileName.includes('.')) {
-    return <UbuntuText>bash: cat: {fileName}: Is a directory</UbuntuText>;
+    return <IsDir fileName={fileName} />;
   }
 
   // catでwhite関連のファイルの場合タグで囲んだファイルの中身を返す
