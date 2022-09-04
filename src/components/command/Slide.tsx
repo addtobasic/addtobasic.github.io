@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import NoFileOrDir from './NoFileOrDir';
+import NoFileOrDir from './error/NoFileOrDir';
 import { SLIDE_PATH, SLIDE_FILE_CONTENTS } from '../../util';
 
 type Props = {

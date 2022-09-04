@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import UbuntuText from '../UbuntuText';
+import UbuntuText from '../../UbuntuText';
 
 type Props = {
   command: string;
