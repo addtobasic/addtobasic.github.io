@@ -1,8 +1,8 @@
 import React from 'react';
 import Whoami from './command/Whoami';
-import NotFound from './command/NotFound';
-import NoFileOrDir from './command/NoFileOrDir';
-import NotDir from './command/NotDir';
+import NotFound from './command/error/NotFound';
+import NoFileOrDir from './command/error/NoFileOrDir';
+import NotDir from './command/error/NotDir';
 import Ls from './command/Ls';
 import Cat from './command/Cat';
 import Pwd from './command/Pwd';
@@ -110,12 +110,13 @@ const handler = (
   else if (command === 'cat') {
     // なにも実行しない
   } else if (command.startsWith('cat ')) {
-    let catFile = command.replace('cat ', '').replace(/\/$/, '');
+    // 入力された内容からfileNameを抽出
+    let fileName = command.replace('cat ', '').replace(/\/$/, '');
 
     return (
       <Cat
         dirItem={dirItem}
-        catFile={catFile}
+        fileName={fileName}
         currentDir={currentDir}
         isFormatted={isFormatted}
       />
