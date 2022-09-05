@@ -82,12 +82,12 @@ const Terminal: FC = () => {
         if (dirName !== '') {
           // GENSHI_PATHの時, LS_GENSHI_ITEMから'.'を含まず前方一致のものを補完
           if (currentDir === GENSHI_PATH) {
-            cd_completion(dirName, LS_GENSHI_ITEM);
+            cdCompletion(dirName, LS_GENSHI_ITEM);
           }
 
           // HOME_PATHの時, LS_HOME_ITEMから'.'を含まず前方一致のものを補完
           else if (currentDir === HOME_PATH) {
-            cd_completion(dirName, LS_HOME_ITEM);
+            cdCompletion(dirName, LS_HOME_ITEM);
           }
         }
       }
@@ -101,27 +101,27 @@ const Terminal: FC = () => {
         if (fileName !== '') {
           // GENSHI_PATHの時, LS_GENSHI_ITEMから'.'を含んで前方一致のものを補完
           if (currentDir === GENSHI_PATH) {
-            cat_completion(fileName, LS_GENSHI_ITEM);
+            catCompletion(fileName, LS_GENSHI_ITEM);
           }
 
           // PRODUCT_PATHの時, LS_PRODUCTS_ITEMから'.'を含んで前方一致のものを補完
           else if (currentDir === PRODUCTS_PATH) {
-            cat_completion(fileName, LS_PRODUCTS_ITEM);
+            catCompletion(fileName, LS_PRODUCTS_ITEM);
           }
 
           // CONTACTS_PATHの時, LS_CONTACTS_ITEMから'.'を含んで前方一致のものを補完
           else if (currentDir === CONTACTS_PATH) {
-            cat_completion(fileName, LS_CONTACTS_ITEM);
+            catCompletion(fileName, LS_CONTACTS_ITEM);
           }
 
           // WHITE_PATHの時, LS_WHITE_ITEMから'.'を含んで前方一致のものを補完
           else if (currentDir === WHITE_PATH) {
-            cat_completion(fileName, LS_WHITE_ITEM);
+            catCompletion(fileName, LS_WHITE_ITEM);
           }
 
           // SLIDE_PATHの時, LS_SLIDE_ITEMから'.'を含んで前方一致のものを補完
           else if (currentDir === SLIDE_PATH) {
-            cat_completion(fileName, LS_SLIDE_ITEM);
+            catCompletion(fileName, LS_SLIDE_ITEM);
           }
         }
       }
@@ -142,7 +142,7 @@ const Terminal: FC = () => {
       // slide補完
       else if (command.startsWith('slide')) {
         let slideFile = command.replace('slide ', '').replace(/\/$/, '');
-        slide_completion(slideFile, LS_SLIDE_ITEM);
+        slideCompletion(slideFile, LS_SLIDE_ITEM);
       }
 
       // pip補完
@@ -190,7 +190,7 @@ const Terminal: FC = () => {
     document.getElementById('bottom').scrollIntoView({ behavior: 'auto' });
   };
 
-  const cd_completion = (path: string, lsItems: string[]): void => {
+  const cdCompletion = (path: string, lsItems: string[]): void => {
     // lsItemsのフォルダから前方一致のものを抽出
     let completion_detail = lsItems
       .filter((item) => !item.includes('.'))
@@ -201,7 +201,7 @@ const Terminal: FC = () => {
     }
   };
 
-  const cat_completion = (file: string, catItems: string[]): void => {
+  const catCompletion = (file: string, catItems: string[]): void => {
     // catItemsのファイルから前方一致のものを抽出
     let completion_detail = catItems
       .filter((item) => item.includes('.'))
@@ -212,7 +212,7 @@ const Terminal: FC = () => {
     }
   };
 
-  const slide_completion = (file: string, slideItems: string[]): void => {
+  const slideCompletion = (file: string, slideItems: string[]): void => {
     // slideItemsのファイルから前方一致のものを抽出
     let completion_detail = slideItems
       .filter((item) => item.includes('.'))
