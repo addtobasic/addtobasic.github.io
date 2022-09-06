@@ -34,7 +34,7 @@ export const LS_WHITE_ITEM: string[] = [
   'pyproject.toml',
   'requirements.txt',
 ];
-export const LS_SLIDE_ITEM: string[] = ['geeksai.pptx'];
+export const LS_SLIDE_ITEM: string[] = ['README.md', 'geeksai.pptx'];
 
 export const CAT_FILE_CONTENTS = {
   'profile.txt': {
