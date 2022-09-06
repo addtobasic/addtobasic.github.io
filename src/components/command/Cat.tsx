@@ -7,11 +7,12 @@ import {
   CAT_FILE_CONTENTS,
   WHITE_PATH,
   SLIDE_PATH,
-  README_FILE_CONTENT,
+  WHITE_README_FILE_CONTENT,
   REQUIREMENTS_FILE_CONTENT,
   MAIN_FILE_CONTENT,
   MAIN_FILE_CONTENT_SEMI,
   PYPROJECT_FILE_CONTENT,
+  SLIDE_README_FILE_CONTENT,
 } from '../../util';
 
 type Props = {
@@ -28,9 +29,9 @@ const Cat: FC<Props> = ({ dirItem, fileName, currentDir, isFormatted }) => {
   }
 
   // catでwhite関連のファイルの場合タグで囲んだファイルの中身を返す
-  if (dirItem.includes(fileName) && currentDir === WHITE_PATH) {
+  else if (dirItem.includes(fileName) && currentDir === WHITE_PATH) {
     if (fileName === 'README.md') {
-      return README_FILE_CONTENT;
+      return WHITE_README_FILE_CONTENT;
     } else if (fileName === 'requirements.txt') {
       return REQUIREMENTS_FILE_CONTENT;
     } else if (fileName === 'main.py0') {
@@ -42,7 +43,11 @@ const Cat: FC<Props> = ({ dirItem, fileName, currentDir, isFormatted }) => {
 
   // catでslide関連のファイルの場合エラーを返す
   else if (dirItem.includes(fileName) && currentDir === SLIDE_PATH) {
-    return <IsSlide fileName={fileName} />;
+    if (fileName === 'README.md') {
+      return SLIDE_README_FILE_CONTENT;
+    } else if (fileName.includes('pptx')) {
+      return <IsSlide fileName={fileName} />;
+    }
   }
 
   // white関連のファイルでないならdirItemに含まれるCAT_FILE_CONTENTSの値を表示
