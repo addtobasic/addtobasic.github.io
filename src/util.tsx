@@ -82,7 +82,7 @@ export const CAT_FILE_CONTENTS = {
   },
 };
 
-export const README_FILE_CONTENT = (
+export const WHITE_README_FILE_CONTENT = (
   <UbuntuText>
     <p># white</p>
     <p className='pb-3'>
@@ -183,6 +183,18 @@ export const SLIDE_FILE_CONTENTS = {
   'geeksai.pptx':
     'https://docs.google.com/presentation/d/e/2PACX-1vSMeBePa36_RPXoBuCWFe9svCL4nmXmkrag5VlQF78ULI0ZZ9Kefy0BN4VF_Ja9Kn1QOBy2oHeHIJzm/embed?start=false&loop=false&delayms=3000',
 };
+
+export const SLIDE_README_FILE_CONTENT = (
+  <UbuntuText>
+    <p># slide</p>
+    <p className='pb-3'>pptxファイルを表示します.</p>
+    <p># Usage</p>
+    <p>```bash</p>
+    <p>$ cd slide</p>
+    <p>$ slide [ファイル名]</p>
+    <p className='pb-3'>```</p>
+  </UbuntuText>
+);
 
 export const getDateStr = () => {
   const now = new Date();
