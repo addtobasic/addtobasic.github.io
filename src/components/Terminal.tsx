@@ -225,32 +225,34 @@ const Terminal: FC = () => {
 
   return (
     <div className='h-screen pt-20'>
-      <div className='flex justify-end bg-title-bar h-10 rounded-t-xl border-gray-600'>
-        <span className='inline-block h-5 w-5 bg-title-bar-button rounded-full  mt-2 text-sm'>
-          {/* <span className=' text-grey-500 ml-0.5 mt-1'>ー</span> */}
-        </span>
-        <span className='inline-block h-5 w-5 bg-title-bar-button rounded-full  mx-2 mt-2 text-sm'>
-          {/* <span className=' text-grey-500 ml-1'>□</span> */}
-        </span>
-        <span className='inline-block h-5 w-5 bg-red-500 rounded-full mr-2 mt-2 text-base'>
-          {/* <span className='text-grey-500 ml-1'>×</span> */}
-        </span>
-      </div>
-      <div className='bg-ubuntu-terminal opacity-90 pb-2'>
-        <div className='flex bg-menu-bar h-6 border-gray-700 font-ubuntu_menu'>
-          {TERMINAL_MENU_INDEX.map((index) => {
-            return (
-              <span
-                className='text-base tracking-tight text-gray-200	ml-2.5'
-                key={index}
-              >
-                {index}
-              </span>
-            );
-          })}
+      <div className='sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl'>
+        <div className='flex justify-end bg-title-bar h-10 rounded-t-xl border-gray-600'>
+          <span className='inline-block h-5 w-5 bg-title-bar-button rounded-full  mt-2 text-sm'>
+            {/* <span className=' text-grey-500 ml-0.5 mt-1'>ー</span> */}
+          </span>
+          <span className='inline-block h-5 w-5 bg-title-bar-button rounded-full  mx-2 mt-2 text-sm'>
+            {/* <span className=' text-grey-500 ml-1'>□</span> */}
+          </span>
+          <span className='inline-block h-5 w-5 bg-red-500 rounded-full mr-2 mt-2 text-base'>
+            {/* <span className='text-grey-500 ml-1'>×</span> */}
+          </span>
+        </div>
+        <div className='bg-ubuntu-terminal opacity-90 pb-2'>
+          <div className='flex bg-menu-bar h-6 border-gray-700 font-ubuntu_menu'>
+            {TERMINAL_MENU_INDEX.map((index) => {
+              return (
+                <span
+                  className='text-base tracking-tight text-gray-200	ml-2.5'
+                  key={index}
+                >
+                  {index}
+                </span>
+              );
+            })}
+          </div>
         </div>
       </div>
-      <div className='bg-ubuntu-terminal opacity-90 h-3/6 shadow-2xl rounded-b-xl pl-3 overflow-auto text-xl'>
+      <div className='bg-ubuntu-terminal opacity-90 h-1/2 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl shadow-2xl rounded-b-xl pl-3 overflow-auto text-xl'>
         {logs.map((log: { command: string; dir: string }, idx: number) => (
           <div key={idx}>
             <span className='tracking-tight font-ubuntu_terminal'>
