@@ -12,7 +12,7 @@ const Slide: FC<Props> = ({ dirItem, fileName, currentDir }) => {
   if (dirItem.includes(fileName) && currentDir === SLIDE_PATH) {
     return (
       <iframe
-        className='w-full h-[569px]'
+        className='h-[569px] w-full'
         src={SLIDE_FILE_CONTENTS[fileName]}
         frameBorder='0'
         allow='fullscreen'
