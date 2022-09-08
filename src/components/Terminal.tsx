@@ -226,23 +226,23 @@ const Terminal: FC = () => {
   return (
     <div className='h-screen pt-20'>
       <div className='sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl'>
-        <div className='flex justify-end bg-title-bar h-10 rounded-t-xl border-gray-600'>
-          <span className='inline-block h-5 w-5 bg-title-bar-button rounded-full  mt-2 text-sm'>
+        <div className='flex h-10 justify-end rounded-t-xl border-gray-600 bg-title-bar'>
+          <span className='mt-2 inline-block h-5 w-5 rounded-full  bg-title-bar-button text-sm'>
             {/* <span className=' text-grey-500 ml-0.5 mt-1'>ー</span> */}
           </span>
-          <span className='inline-block h-5 w-5 bg-title-bar-button rounded-full  mx-2 mt-2 text-sm'>
+          <span className='mx-2 mt-2 inline-block h-5 w-5  rounded-full bg-title-bar-button text-sm'>
             {/* <span className=' text-grey-500 ml-1'>□</span> */}
           </span>
-          <span className='inline-block h-5 w-5 bg-red-500 rounded-full mr-2 mt-2 text-base'>
+          <span className='mr-2 mt-2 inline-block h-5 w-5 rounded-full bg-red-500 text-base'>
             {/* <span className='text-grey-500 ml-1'>×</span> */}
           </span>
         </div>
-        <div className='bg-ubuntu-terminal opacity-90 pb-2'>
-          <div className='flex bg-menu-bar h-6 border-gray-700 font-ubuntu_menu'>
+        <div className='bg-ubuntu-terminal pb-2 opacity-90'>
+          <div className='flex h-6 border-gray-700 bg-menu-bar font-ubuntu_menu'>
             {TERMINAL_MENU_INDEX.map((index) => {
               return (
                 <span
-                  className='text-base tracking-tight text-gray-200	ml-2.5'
+                  className='ml-2.5 text-base tracking-tight	text-gray-200'
                   key={index}
                 >
                   {index}
@@ -252,10 +252,10 @@ const Terminal: FC = () => {
           </div>
         </div>
       </div>
-      <div className='bg-ubuntu-terminal opacity-90 h-1/2 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl shadow-2xl rounded-b-xl pl-3 overflow-auto text-xl'>
+      <div className='h-1/2 overflow-auto rounded-b-xl bg-ubuntu-terminal pl-3 text-xl opacity-90 shadow-2xl sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl'>
         {logs.map((log: { command: string; dir: string }, idx: number) => (
           <div key={idx}>
-            <span className='tracking-tight font-ubuntu_terminal'>
+            <span className='font-ubuntu_terminal tracking-tight'>
               <span className='text-ubuntu-terminal-text'>
                 genshi@addtobasic
               </span>
@@ -270,7 +270,7 @@ const Terminal: FC = () => {
             {replies[idx]}
           </div>
         ))}
-        <span className='tracking-tight font-ubuntu_terminal'>
+        <span className='font-ubuntu_terminal tracking-tight'>
           <span className='text-ubuntu-terminal-text'>genshi@addtobasic</span>
           <span className='text-white'>:</span>
           <span className='text-blue-500'>~</span>
@@ -278,7 +278,7 @@ const Terminal: FC = () => {
           <span className='text-white'> $ </span>
         </span>
         <input
-          className='bg-transparent focus-within:outline-none w-1/2 font-ubuntu_terminal text-white'
+          className='w-1/2 bg-transparent font-ubuntu_terminal text-white focus-within:outline-none'
           id='command-area'
           type='text'
           autoComplete='off'

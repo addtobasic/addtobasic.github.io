@@ -10,7 +10,7 @@ const Ls: FC<Props> = ({ dirItem }) => (
     {dirItem
       .filter((fileName) => fileName.includes('.'))
       .map((item) => (
-        <span className='pr-4 text-white inline-block' key={item}>
+        <span className='inline-block pr-4 text-white' key={item}>
           {item}
         </span>
       ))}
@@ -18,7 +18,7 @@ const Ls: FC<Props> = ({ dirItem }) => (
     {dirItem
       .filter((fileName) => !fileName.includes('.'))
       .map((item) => (
-        <span className='pr-4 text-blue-500 inline-block' key={item}>
+        <span className='inline-block pr-4 text-blue-500' key={item}>
           {item}
         </span>
       ))}
